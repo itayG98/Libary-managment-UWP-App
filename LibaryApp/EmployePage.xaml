@@ -1,0 +1,74 @@
+﻿<Page
+    x:Class="LibaryApp.EmployePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibaryApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="PageGrid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="Up" Height="3*"/>
+            <RowDefinition x:Name="Down" Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Bisque">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="Text"    Height="5*"/>
+                <RowDefinition x:Name="Controls" Height="2*"/>
+            </Grid.RowDefinitions>
+            <CommandBar Grid.Row="0" MinHeight="50">
+                <AppBarButton MinWidth="140" Content="Sign Out" Name="SignOut"/>
+                <AppBarButton MinWidth="140" Content="Change Password" Name="ChangePassword"/>
+                <AppBarButton MinWidth="140"  Content="Change Details" Name="ChangeDetails"/>
+                <AppBarButton MinWidth="140"  Content="Add Item" Name="AddItem"/>
+            </CommandBar>
+            <Grid Grid.Row="0">
+
+                <TextBlock x:Name="Congrat"  FontSize="75" Text="Hello Employee" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,105,0,0"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="PersonsOrItems" Margin="5" Content="Show Costumers"  Grid.Column="1" Width="160" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Button x:Name="MyItemsOrLibary" Content="My items" Grid.Column="1" Margin="5" Width="160" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+
+                <ComboBox x:Name="SortItems" Margin="5" Header="Sort"  Grid.Column="2" Text="Sort"  Width="160" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <ComboBoxItem x:Name="SortByName" Content="Name A-Z"/>
+                    <ComboBoxItem x:Name="SortByNameReverse" Content="Name Z-A"/>
+                    <ComboBoxItem x:Name="SortByPrice" Content="Price high to low"/>
+                    <ComboBoxItem x:Name="SortByPriceReverse" Content="Price low to high"/>
+                </ComboBox>
+                <ComboBox x:Name="SortPerson" Margin="5" Header="Sort"  Grid.Column="2" Text="Sort"  Width="160" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed">
+                    <ComboBoxItem x:Name="SortByFName" Content="Name A-Z"/>
+                    <ComboBoxItem x:Name="SortByFNameReverse" Content="Name Z-A"/>
+                   
+                </ComboBox>
+                <ComboBox x:Name="LibaryItemsType" Margin="5"  Header="Type" Grid.Column="2" Text="Sort" Width="160" VerticalAlignment="Bottom" >
+                    <ComboBoxItem x:Name="AllItems" Content="All"/>
+                    <ComboBoxItem x:Name="OnlyBooks" Content="Books"/>
+                    <ComboBoxItem x:Name="OnlyJournals" Content="Journals"/>
+                </ComboBox>
+                <ComboBox x:Name="CostumerOrEmployees" Margin="5"  Header="Type" Grid.Column="2" Text="Sort" Width="160" VerticalAlignment="Bottom" Visibility="Collapsed" >
+                    <ComboBoxItem x:Name="AllPersons" Content="All"/>
+                    <ComboBoxItem x:Name="OnlyCostumers" Content="OnlyCostumers"/>
+                    <ComboBoxItem x:Name="OnlyEmployees" Content="OnlyEmployees"/>
+                    <ComboBoxItem x:Name="ShowBorrowers" Content="ShowBorrowers"/>
+                </ComboBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Background="SkyBlue">
+            <ListView x:Name="ItemsListVeiw" Background="AliceBlue" HorizontalAlignment="Center" Height="431" Margin="0,39,0,0" VerticalAlignment="Top" Width="1085"/>
+        </Grid>
+
+    </Grid>
+
+</Page>

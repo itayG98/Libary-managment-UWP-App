@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="LibaryApp.AddItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibaryApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Bisque">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <CommandBar Grid.Row="0" Grid.ColumnSpan="2" MinHeight="50">
+                    <AppBarButton MinWidth="140" Content="Sign Out" Name="SignOut"/>
+                    <AppBarButton MinWidth="140" Content="Change Password" Name="ChangePassword"/>
+                    <AppBarButton MinWidth="140"  Content="Main Page" Name="Libary"/>
+                </CommandBar>
+                <TextBlock x:Name="Congrat" Grid.ColumnSpan="2" FontSize="70" Text="Create item" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,90,0,0"/>
+                <Button x:Name="BookBtn" Grid.Column="0" Content="Book" VerticalAlignment="Bottom" FontSize="25" FontWeight="ExtraBlack" HorizontalAlignment="Center" MinWidth="120"/>
+                <Button x:Name="JournalBtn" Grid.Column="1" Content="Journal" VerticalAlignment="Bottom" FontSize="25" FontWeight="ExtraBlack" HorizontalAlignment="Center" MinWidth="120"/>
+
+            </Grid>
+            <Grid Grid.Row="1" Background="SkyBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid  Grid.Column="0" x:Name="LeftDeitails"  Padding="50" Margin="25" >
+                    
+                </Grid>
+                <Grid   Grid.Column="1" x:Name="RightDeitails" Padding="50" Margin="25" >
+                    
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Background="SkyBlue"  >
+                <Button x:Name="Submit" Content="Submit"  Margin="50" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
