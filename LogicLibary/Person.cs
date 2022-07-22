@@ -8,7 +8,7 @@ namespace LibaryModel
     {
         public const int MAX_BORROWING = 5;
         protected const string DEFAULT_PASSWORD = "1234ABCD";
-        private const int MAX_PASSWOD_LENGTH = 12;
+        public const int MAX_PASSWOD_LENGTH = 12;
 
         private readonly string _id;
         private string _firstName;
@@ -91,7 +91,7 @@ namespace LibaryModel
         public bool CheckPassword(string password)
         {
             return password == _password;
-        }
+        }       
         public virtual bool Borrow(LibaryItem lib)
         {
             if (BorrowingList.IndexOf(lib.ItemId) == -1 && BorrowingCount < MAX_BORROWING && lib.IsBorrowed == false)

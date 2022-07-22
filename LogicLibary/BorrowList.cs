@@ -44,7 +44,7 @@ namespace LibaryModel
             {
                 for (int i = 0; i < Borrows.Length; i++)
                 {
-                    if (Borrows[i].Equals(new BorrowDetail().Empty))
+                    if (!Contains(lib.ItemId)&&Borrows[i].Equals(new BorrowDetail().Empty))
                     {
                         Borrows[i] = new BorrowDetail(lib.ItemId, lib.Name, DateTime.Today);
                         lib.IsBorrowed = true;

@@ -12,12 +12,12 @@ namespace LibaryModel
 
         private int _country;
         private int _publisher;
+        private int _serialNumber;
 
         public static Dictionary<string, int> CountriesDict { get; set; }
         public static Dictionary<string, int> PublishersDict { get; set; }
-        public int SerialNumber { get; set; }
+        public int SerialNumber { get { return _serialNumber; } private set { _serialNumber = value<9999 &&value>=0 ? value : UNKNOWN_DEFAULT_CODE; } }
         public int Control { get { return (Country + Publisher + SerialNumber) % 10; } }
-
         public int Country
         {
             get { return _country; }
@@ -53,6 +53,7 @@ namespace LibaryModel
         }
         public ISBN(string publisherSt, int serialNumber, string countrySt)
         {
+            SerialNumber = serialNumber;
             if (CountriesDict.ContainsKey(countrySt))
                 Country = CountriesDict[countrySt];
             else
@@ -61,7 +62,6 @@ namespace LibaryModel
                 Publisher = PublishersDict[publisherSt];
             else
                 Publisher = UNKNOWN_DEFAULT_CODE;
-            SerialNumber = serialNumber;
         }
 
         public override string ToString()
@@ -72,7 +72,12 @@ namespace LibaryModel
         public override bool Equals(object obj)
         {
             if (obj is ISBN other)
-                return ToString() == other.ToString();
+            {
+                return Country == other.Country &&
+                    Publisher == other.Publisher &&
+                    SerialNumber == other.SerialNumber&&
+                    Control==other.Control;
+            }
             return false;
         }
     }

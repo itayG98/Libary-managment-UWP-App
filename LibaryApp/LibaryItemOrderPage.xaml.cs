@@ -18,6 +18,7 @@ namespace LibaryApp
     public sealed partial class LibaryItemOrderPage : Page
     {
         public Logic logic;
+        string msg;
         public LibaryItemOrderPage()
         {
             this.InitializeComponent();
@@ -32,10 +33,11 @@ namespace LibaryApp
 
         private void ChangeDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (logic.Signed as Employye != null)
+            if (logic.Signed as Employye != null && logic.libaryItems.Contains(logic.CurrentItem))
                 Frame.Navigate(typeof(EditItem), logic);
             else
             {
+                logic.ClearItem();
                 logic.PersonToEdit = logic.Signed;
                 Frame.Navigate(typeof(EditPerson), logic);
             }
@@ -61,18 +63,19 @@ namespace LibaryApp
         }
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
+            logic.SignOut();
             Frame.Navigate(typeof(MainPage), logic);
         }
         private void Borrow_Click(object sender, RoutedEventArgs e)
         {
-            if (logic.Borrow())
+            if (logic.CurrentItem != null && logic.Borrow())
             {
                 Avilability.Fill = new SolidColorBrush(Colors.Red);
-                ShowAlert($"Borrowed {logic.CurrentItem} sucssefuly");
+                ShowAlert($"Borrowed {msg} sucssefuly");
             }
             else
             {
-                ShowAlert($"Could'nt borrow {logic.CurrentItem}");
+                ShowAlert($"Could'nt borrow {msg}");
             }
         }
         private void Buy_Click(object sender, RoutedEventArgs e)
@@ -80,11 +83,11 @@ namespace LibaryApp
             if (logic.Buy())
             {
                 Avilability.Fill = new SolidColorBrush(Colors.Red);
-                ShowAlert($"Bought {logic.CurrentItem} sucssefuly");
+                ShowAlert($"Bought {msg} sucssefuly");
             }
             else
             {
-                ShowAlert($"Could'nt buy {logic.CurrentItem}");
+                ShowAlert($"Could'nt buy {msg}");
             }
         }
         private void Retrun_Click(object sender, RoutedEventArgs e)
@@ -109,6 +112,7 @@ namespace LibaryApp
                 else
                     Avilability.Fill = new SolidColorBrush(Colors.Green);
                 Congrat.Text = logic.GetName;
+                msg = logic.CurrentItem.ToString();
             }
             else
                 Frame.Navigate(typeof(MainPage), logic);

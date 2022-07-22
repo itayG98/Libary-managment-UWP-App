@@ -122,7 +122,6 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BorrowList.cs" />
-    <Compile Include="ChildCostumer.cs" />
     <Compile Include="Costumer.cs" />
     <Compile Include="Employye.cs" />
     <Compile Include="ISNB.cs" />

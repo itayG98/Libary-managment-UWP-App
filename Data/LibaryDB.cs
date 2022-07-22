@@ -24,14 +24,14 @@ namespace DB_Libary
         public static Dictionary<string, int> Countries { get => _countries; set => _countries = value; }
         public static Dictionary<string, int> BookPublishers { get => _bookPublishers; set => _bookPublishers = value; }
         public static List<string> Journaleditors { get => _journalEditors; set => _journalEditors = value; }
-        public static LibaryDB DataInstance 
+        public static LibaryDB DataInstance
         {
-            get 
+            get
             {
-                if (_DataInstance== null)
+                if (_DataInstance == null)
                     _DataInstance = new LibaryDB();
                 return _DataInstance;
-            } 
+            }
         }
 
         static LibaryDB()
@@ -184,9 +184,8 @@ namespace DB_Libary
             //Persons Data
             Persons = new List<Person>
             {
-                new Employye("999268121","Itay","Getahun","Rehovot","none"),
-                new Employye("999240872","Kendrick","Lamar","Compotn","none"),
-                new Costumer("999984131","Fname1","Lname","Rehovot","none"),
+                Employye.EmloyeSigning("12345","999268121","Itay","Getahun","Rehovot","none"),
+                Employye.EmloyeSigning("12345","999240872","Kendrick","Lamar","Compotn","none"),
                 new Costumer("999691249","Fname2","Lname","Rehovot","none"),
                 new Costumer("345678320","Fname1 ","Lname","Rehovot","none"),
                 new Costumer("453743742","Fname2 ","Lname","Rehovot","none"),
@@ -201,7 +200,9 @@ namespace DB_Libary
                 new Costumer("888888880","Fname11 ","Lname","Rehovot","none"),
                 new Costumer("555555556","Fname12 ","Lname","Rehovot","none"),
                 new Costumer("212121214","Fname13 ","Lname","Rehovot","none"),
-                new Costumer("666666664","Fname14 ","Lname","Rehovot","none")
+                new Costumer("666666664","Fname14 ","Lname","Rehovot","none"),
+                new StudentCostumer("347166134","Student1 ","Student","Rehovot","none"),
+                new StudentCostumer("347166118","Student2 ","Student","Rehovot","none")
             };
         }
     }

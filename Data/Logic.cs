@@ -34,14 +34,13 @@ namespace DB_Libary
 
         public string DeleteCurrentItem()
         {
-            if (CurrentItem != null)
+            if (CurrentItem != null && CurrentItem.IsBorrowed == false)
             {
                 return $"Deleted{Repo.Delete(CurrentItem)}";
             }
             else
-                throw new Exception("Couldnt sucseed deleting item");
+                throw new Exception("Couldnt succseed deleting item");
         }
-
         public void UpdateLogicLists()
         {
             persons = Repo.GetsSortedBy(new IComparerFName()).ToList();
@@ -70,23 +69,27 @@ namespace DB_Libary
             if (!Person.Validation(id))
                 return false;
             Person TrySigned = persons.Find((p) => p.Id == id);
-            Signed = Repo.SignIn(TrySigned, password);
-            if (Signed != null)
+            if (TrySigned != null)
             {
-                return true;
+                Signed = Repo.SignIn(TrySigned, password);
+                if (Signed != null)
+                    return true;
             }
-            else
-                return false;
+            return false;
         }
-        public Person CostumerSignUp(string id, string fname, string lname, string city, string street,int  houseNumber=-1,string  password="1234ABCD") 
+        public Person CostumerSignUp(string id, string fname, string lname, string city, string street, int houseNumber = -1, string password = "1234ABCD")
         {
-            Signed =Repo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
+            Signed = Repo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
+            if (Signed == null)
+                throw new Exception("Could'nt Sign you up check fields");
             UpdateLogicLists();
             return Signed;
         }
-        public Person EmployeSignUp(string id, string fname, string lname, string city, string street,string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
+        public Person EmployeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
         {
-            Signed = Repo.EmployeeSignUp(id,fname,lname,city,street,ManagerPassword,houseNumber,password);
+            Signed = Repo.EmployeeSignUp(id, fname, lname, city, street, ManagerPassword, houseNumber, password);
+            if (Signed == null)
+                throw new Exception("Can't Sign you as employee wrong password");
             UpdateLogicLists();
             return Signed;
         }
@@ -115,9 +118,12 @@ namespace DB_Libary
         {
             if (CurrentItem != null && Repo.Contain(CurrentItem) && CurrentItem.IsBorrowed == false)
             {
-                Repo.Delete(CurrentItem);
-                UpdateLogicLists();
-                return true;
+                if (Repo.Delete(CurrentItem) != null)
+                {
+                    UpdateLogicLists();
+                    ClearItem();
+                    return true;
+                }
             }
             return false;
         }

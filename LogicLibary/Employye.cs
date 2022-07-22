@@ -9,13 +9,17 @@ namespace LibaryModel
     public class Employye : Person
     {
         private const string EMPLOYE_SIGNING_CODE = "12345";
-        public Employye(string id, string firstName, string lastName, string city, string street, int houseNumber = -1, string password = DEFAULT_PASSWORD) : base(id, firstName, lastName, city, street, houseNumber, password)
+        private Employye(string id, string firstName, string lastName, string city, string street, int houseNumber = -1, string password = DEFAULT_PASSWORD) : base(id, firstName, lastName, city, street, houseNumber, password)
         {
         }
 
-        public bool EmloyeSigning(string password)
+        public static Employye EmloyeSigning(string managerPassword, string id, string firstName, string lastName, string city, string street, int houseNumber = -1, string password = DEFAULT_PASSWORD)
         {
-            return EMPLOYE_SIGNING_CODE == password;
+            if (EMPLOYE_SIGNING_CODE == managerPassword)
+            {
+                return new Employye(id, firstName, lastName, city, street, houseNumber, password);
+            }
+            return null;
         }
     }
 }

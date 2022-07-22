@@ -25,25 +25,9 @@ namespace LibaryApp
             SignInBtn.Click += SignInBtn_Click;
             SignUpBtn.Click += SignUp_Click;
         }
-
         private void SignUp_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SignUpPage), logic);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (e.Parameter as Logic != null)
-            {
-                logic = (Logic)e.Parameter;
-                logic.SignOut();
-                logic.ClearItem();
-                logic.PersonToEdit = null;
-            }
-            else
-            {
-                logic = new Logic();
-            }
         }
         private void SignInBtn_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -65,6 +49,20 @@ namespace LibaryApp
             {
                 IDBox.Foreground = new SolidColorBrush(Colors.Red);
                 PasswordBox.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter as Logic != null)
+            {
+                logic = (Logic)e.Parameter;
+                logic.SignOut();
+                logic.ClearItem();
+                logic.PersonToEdit = null;
+            }
+            else
+            {
+                logic = new Logic();
             }
         }
         public async void ShowAlert(string msg)

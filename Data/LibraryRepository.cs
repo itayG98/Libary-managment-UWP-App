@@ -46,8 +46,11 @@ namespace DB_Libary
         {
             LibaryItem ToDel = mookData.LibaryItems.FirstOrDefault(i => i.ItemId == item.ItemId);
             if (ToDel != null)
+            {
                 mookData.LibaryItems.Remove(ToDel);
-            return item;
+                return item;
+            }
+            return null;
         }
         public IQueryable<LibaryItem> Get()
         {
@@ -113,8 +116,11 @@ namespace DB_Libary
         {
             LibaryItem ToDel = mookData.LibaryItems.FirstOrDefault(i => i.Equals(p));
             if (ToDel != null)
+            {
                 mookData.LibaryItems.Remove(ToDel);
-            return p;
+                return p;
+            }
+            return null;
         }
         public Person Add(Person p)
         {
@@ -150,19 +156,29 @@ namespace DB_Libary
             if (mookData.Persons.Find(p => p.Id == id) == null)
             {
                 Person p = new Costumer(id, fname, lname, city, street, houseNumber, password);
-                mookData.Persons.Add(p);
-                return p;
+                if (p != null)
+                {
+                    mookData.Persons.Add(p);
+                    return p;
+                }
             }
+            else 
+                throw new Exception("ID is allready signed"); 
             return null;
         }
-        public Person EmployeeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword,  int houseNumber = -1, string password = "1234ABCD")
+        public Person EmployeeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
         {
             if (mookData.Persons.Find(p => p.Id == id) == null)
             {
-                Person p = new Employye(id, fname, lname, city, street, houseNumber, password);
-                mookData.Persons.Add(p);
-                return p;
+                Person p = Employye.EmloyeSigning(ManagerPassword, id, fname, lname, city, street, houseNumber, password);
+                if (p != null)
+                {
+                    mookData.Persons.Add(p);
+                    return p;
+                }
             }
+            else
+                throw new Exception("ID is allready signed");
             return null;
         }
         public bool Contain(Person p)

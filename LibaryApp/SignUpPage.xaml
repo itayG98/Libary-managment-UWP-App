@@ -33,7 +33,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="Fname" Grid.Row="0" Grid.Column="0" Margin="25" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Header="First name"/>
+            <TextBox x:Name="Fname" Grid.Row="0" Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Header="First name"/>
             <TextBox x:Name="Lname" Grid.Row="1" Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Center"  HorizontalAlignment="Stretch"  Header="Last Name"/>
             <TextBox x:Name="City" Grid.Row="2" Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Center"  HorizontalAlignment="Stretch"  Header="City"/>
             <TextBox x:Name="Street" Grid.Row="3" Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Center"  HorizontalAlignment="Stretch"  Header="Street"/>

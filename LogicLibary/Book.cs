@@ -52,9 +52,10 @@ namespace LibaryModel
 
         public override bool Equals(object obj)
         {
-            if (obj is Book other)
+            if (obj is Book other && other!=null)
                 return _isbn.Equals(other._isbn);
-            return false;
+            else 
+                return false;
         }
 
         public override string ToString()

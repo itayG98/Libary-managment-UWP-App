@@ -34,7 +34,7 @@ namespace LibaryModel
 
         public override bool Equals(object obj)
         {
-            if (obj is Journal other)
+            if (obj is Journal other && other!=null)
                 return Name == other.Name && JournalFrequancy == other.JournalFrequancy && Editors == other.Editors;
             return false;
         }

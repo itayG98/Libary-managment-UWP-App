@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -40,10 +41,19 @@ namespace LibaryApp
         private void SignUpAsManager_Click(object sender, RoutedEventArgs e)
         {
             int HouseNum = -1;
-            if (Validate(ref HouseNum))
+            if (ValidateAndColor(ref HouseNum))
             {
-                logic.EmployeSignUp(ID.Text, Fname.Text, Lname.Text, City.Text, Street.Text, Password.Password, HouseNum, Password.Password);
-                Frame.Navigate(typeof(EmployePage),logic);
+                try
+                {
+                    logic.EmployeSignUp(ID.Text, Fname.Text, Lname.Text, City.Text, Street.Text, Password.Password, HouseNum, Password.Password);
+                    Frame.Navigate(typeof(EmployePage), logic);
+                }
+                catch (Exception ex)
+                {
+                    ShowAlert(ex.Message);
+                    Password.Password = string.Empty;
+                    ConiformPassword.Password = string.Empty;
+                }
             }
             else
             {
@@ -53,50 +63,64 @@ namespace LibaryApp
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
             int HouseNum = -1;
-            if (Validate(ref HouseNum))
+            if (ValidateAndColor(ref HouseNum))
             {
-                logic.CostumerSignUp(ID.Text, Fname.Text, Lname.Text, City.Text, Street.Text, HouseNum, Password.Password);
-                Frame.Navigate(typeof(CostumerPage),logic);
+                try
+                {
+                    logic.CostumerSignUp(ID.Text, Fname.Text, Lname.Text, City.Text, Street.Text, HouseNum, Password.Password);
+                    Frame.Navigate(typeof(CostumerPage), logic);
+                }
+                catch (Exception ex)
+                {
+                    ShowAlert(ex.Message);
+                }
             }
             else
-            {
                 Congrat.Text = "Sorry please try again";
-            }
         }
-        private bool Validate(ref int houseNum)
+        private bool ValidateAndColor(ref int houseNum)
         {
             if (!Person.Validation(ID.Text))
             {
                 ID.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
-            if (Password.Password != ConiformPassword.Password && Password.Password.All(c => char.IsLetterOrDigit(c)))
+            ID.Foreground = new SolidColorBrush(Colors.Black);
+            if (Password.Password != ConiformPassword.Password && Password.Password.All(c => char.IsLetterOrDigit(c))
+                &&Password.Password.Length<Person.MAX_PASSWOD_LENGTH)
             {
                 Password.Foreground = new SolidColorBrush(Colors.Red);
                 ConiformPassword.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
+            Password.Foreground = new SolidColorBrush(Colors.Black);
+            ConiformPassword.Foreground = new SolidColorBrush(Colors.Black);
             if (!logic.NameValidity(Fname.Text) || !logic.NameValidity(Lname.Text))
             {
                 Lname.Foreground = new SolidColorBrush(Colors.Red);
                 Fname.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
+            Lname.Foreground = new SolidColorBrush(Colors.Black);
+            Fname.Foreground = new SolidColorBrush(Colors.Black);
             if (!logic.NameValidity(City.Text))
             {
                 City.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
+            City.Foreground = new SolidColorBrush(Colors.Black);
             if (!logic.NameValidity(Street.Text))
             {
                 Street.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
+            Street.Foreground = new SolidColorBrush(Colors.Black);
             if (!int.TryParse(HouseNumber.Text, out houseNum) && houseNum < 1000)
             {
                 HouseNumber.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
+            HouseNumber.Foreground = new SolidColorBrush(Colors.Black);
             return true;
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -104,7 +128,15 @@ namespace LibaryApp
             if (e.Parameter as Logic != null)
             {
                 logic = (Logic)e.Parameter;
+                Password.Description = $"Up to {Person.MAX_PASSWOD_LENGTH} charecrers or digits";
+                ConiformPassword.Description = $"Coniform Password";
             }
+            else
+                Frame.Navigate(typeof(MainPage));
+        }
+        public async void ShowAlert(string msg)
+        {
+            await new MessageDialog(msg).ShowAsync();
         }
     }
 }
