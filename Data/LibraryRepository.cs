@@ -44,6 +44,8 @@ namespace DB_Libary
         }
         public LibaryItem Delete(LibaryItem item)
         {
+            if (item.IsBorrowed == true)
+                throw new Exception("Cant Deleate borrowed book ");
             LibaryItem ToDel = mookData.LibaryItems.FirstOrDefault(i => i.ItemId == item.ItemId);
             if (ToDel != null)
             {
@@ -114,11 +116,13 @@ namespace DB_Libary
         }
         public Person Delete(Person p)
         {
-            LibaryItem ToDel = mookData.LibaryItems.FirstOrDefault(i => i.Equals(p));
+            if (p.BorrowingCount >0)
+                throw new Exception("Cant Deleate Person first return books ");
+            Person ToDel = mookData.Persons.FirstOrDefault(person => person.Equals(p));
             if (ToDel != null)
             {
-                mookData.LibaryItems.Remove(ToDel);
-                return p;
+                mookData.Persons.Remove(ToDel);
+                return ToDel;
             }
             return null;
         }

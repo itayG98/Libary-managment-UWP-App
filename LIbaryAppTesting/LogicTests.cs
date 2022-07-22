@@ -30,8 +30,14 @@ namespace LIbaryAppTesting
             Assert.IsNotNull(mookData.LibaryItems.Find(lib => lib.Equals(libaryItem)));
             Assert.IsNotNull(mookData.Persons.Find(p => p.Equals(person)));
 
-/*            Assert.IsNull(Logic.Repo.Delete(libaryItem));
-            Assert.IsNull(Logic.Repo.Delete(person));*/
+            Logic.Repo.Borrow(person, libaryItem);
+            Assert.ThrowsException<Exception>(()=>Logic.Repo.Delete(libaryItem));
+            Assert.ThrowsException<Exception>(()=>Logic.Repo.Delete(person));
+
+            Assert.IsNotNull(Logic.Repo.ReturnBook(person, libaryItem));
+
+            Assert.IsNotNull(Logic.Repo.Delete(person));
+            Assert.IsNotNull(Logic.Repo.Delete(libaryItem));
         }
 
     }
