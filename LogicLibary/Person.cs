@@ -31,8 +31,6 @@ namespace LibaryModel
         public int BorrowingCount { get => _borrowingCount; set => _borrowingCount = value; }
         public double DiscountPerCent { get => _discountPercentage; set => _discountPercentage = value > 50 ? 50 : value; }
         public BorrowDetailList BorrowingList { get => _borrowingList; set => _borrowingList = value; }
-
-
         protected Person(string id, string firstName, string lastName, string city, string street, int houseNumber = -1, string password = DEFAULT_PASSWORD)
         {
             if (Validation(id))
@@ -48,7 +46,6 @@ namespace LibaryModel
             BorrowingCount = 0;
             BorrowingList = new BorrowDetailList(MAX_BORROWING);
         }
-
         public static bool Validation(string id)
         {
             int sum = 0, temp;
@@ -62,7 +59,7 @@ namespace LibaryModel
                     if (i % 2 == 1 && i != 8)
                     {
                         temp *= 2;
-                        temp = temp > 9 ? temp = 1 + temp % 10 : temp;
+                        temp = temp > 9 ?1 + temp % 10 : temp;
                     }
                     sum += temp;
                 }

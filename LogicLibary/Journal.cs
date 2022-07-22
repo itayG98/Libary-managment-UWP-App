@@ -20,8 +20,6 @@ namespace LibaryModel
         public string Editors { get => _editors; set => _editors = value; }
 
 
-
-
         public Journal(string name, DateTime printedDate, Frequancy frequancy, string editors ,double price = DEFAULT_JOURNAL_PRICE) : base(name, printedDate, price)
         {
             JournalFrequancy = frequancy;
@@ -34,12 +32,10 @@ namespace LibaryModel
             Editors = editors;
         }
 
-
         public override bool Equals(object obj)
         {
-            Journal temp = obj as Journal;
-            if (temp != null)
-                return Name == temp.Name && JournalFrequancy == temp.JournalFrequancy && Editors == temp.Editors;
+            if (obj is Journal other)
+                return Name == other.Name && JournalFrequancy == other.JournalFrequancy && Editors == other.Editors;
             return false;
         }
 

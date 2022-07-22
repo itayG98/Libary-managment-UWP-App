@@ -31,11 +31,9 @@ namespace LibaryModel
 
         public Book(int publisher, int serialNum, string name, DateTime printedDate, string authors, double price = DEFAULT_BOOK_PRICE, int country = 965) : base(name, printedDate, price)
         {
-            _isbn = new ISBN( publisher, serialNum, country);
-
+            _isbn = new ISBN(publisher, serialNum, country);
             Publisher = publisher;
             Authors = authors;
-
         }
 
         public string Authors
@@ -54,8 +52,7 @@ namespace LibaryModel
 
         public override bool Equals(object obj)
         {
-            Book other = obj as Book;
-            if (other != null)
+            if (obj is Book other)
                 return _isbn.Equals(other._isbn);
             return false;
         }

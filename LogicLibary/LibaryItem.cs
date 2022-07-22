@@ -72,6 +72,13 @@ namespace LibaryModel
         {
             return $"{Name} {Price} Printed in : {PrintedDate.ToLongDateString()}";
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is LibaryItem lib)
+                return ItemId.Equals(lib._itemId);
+            return false;
+        }
     }
 
 

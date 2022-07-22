@@ -41,7 +41,6 @@ namespace LibaryApp
             ShowMyItems = false;
             ShowPersons = false;
         }
-
         private void Addbook_Click(object sender, RoutedEventArgs e)
         {
             if (logic.Signed as Employye != null)

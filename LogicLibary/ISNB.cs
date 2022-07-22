@@ -13,7 +13,7 @@ namespace LibaryModel
         private int _country;
         private int _publisher;
 
-        public static Dictionary<string, int> CountriesDict { get;  set; }
+        public static Dictionary<string, int> CountriesDict { get; set; }
         public static Dictionary<string, int> PublishersDict { get; set; }
         public int SerialNumber { get; set; }
         public int Control { get { return (Country + Publisher + SerialNumber) % 10; } }
@@ -68,12 +68,13 @@ namespace LibaryModel
         {
             return $"{PREFIX_NUM}-{Country:D4}-{Publisher:D3}-{SerialNumber:D3}-{Control}";
         }
-    }
 
-    public class IsbnException : Exception
-    {
-        public IsbnException(string message)
-            : base(message) { }
+        public override bool Equals(object obj)
+        {
+            if (obj is ISBN other)
+                return ToString() == other.ToString();
+            return false;
+        }
     }
 }
 
