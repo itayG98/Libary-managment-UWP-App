@@ -26,8 +26,8 @@
                     <AppBarButton MinWidth="140"  Content="Main Page" Name="Libary"/>
                 </CommandBar>
                 <TextBlock x:Name="Congrat" Grid.ColumnSpan="2" FontSize="70" Text="Create item" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,90,0,0"/>
-                <Button x:Name="BookBtn" Grid.Column="0" Content="Book" VerticalAlignment="Bottom" FontSize="25" FontWeight="ExtraBlack" HorizontalAlignment="Center" MinWidth="120"/>
-                <Button x:Name="JournalBtn" Grid.Column="1" Content="Journal" VerticalAlignment="Bottom" FontSize="25" FontWeight="ExtraBlack" HorizontalAlignment="Center" MinWidth="120"/>
+                <Button x:Name="BookBtn" Grid.Column="0" Content="Book" VerticalAlignment="Bottom"  FontWeight="ExtraBlack" HorizontalAlignment="Right" MinWidth="120"/>
+                <Button x:Name="JournalBtn" Grid.Column="1" Content="Journal" VerticalAlignment="Bottom"  FontWeight="ExtraBlack" HorizontalAlignment="Left" MinWidth="120"/>
 
             </Grid>
             <Grid Grid.Row="1" Background="SkyBlue">

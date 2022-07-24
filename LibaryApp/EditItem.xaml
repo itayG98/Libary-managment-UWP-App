@@ -49,9 +49,9 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Row="0" x:Name="NameF" Header="Name" FontWeight="ExtraBold"   Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="1" x:Name="CodeF" Header="Code"  FontWeight="ExtraBold"   Margin="3" Padding="3" FontSize="25" />
-                    <DatePicker Grid.Row="2" x:Name="PrintedInF"  Header="Printing Date" FontWeight="ExtraBold"   Margin="3" Padding="3" FontSize="25" HorizontalAlignment="Stretch"  />
+                    <TextBox Grid.Row="0" x:Name="NameF" Header="Name" FontWeight="ExtraBold"   Margin="3" Padding="3" />
+                    <TextBox Grid.Row="1" x:Name="CodeF" Header="Code"  FontWeight="ExtraBold"   Margin="3" Padding="3"  />
+                    <DatePicker Grid.Row="2" x:Name="PrintedInF"  Header="Printing Date" FontWeight="ExtraBold"   Margin="3" Padding="3" HorizontalAlignment="Stretch"  />
 
                 </Grid>
             </Grid>

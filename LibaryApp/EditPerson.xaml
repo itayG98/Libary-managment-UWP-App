@@ -37,9 +37,9 @@
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" x:Name="LastName"  FontWeight="ExtraBold" Header="Last Name"    Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="1" x:Name="Street"  FontWeight="ExtraBold"  Header="Street"  Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="2" x:Name="HouseNumber"  FontWeight="ExtraBold" Header="House Number"   Margin="3" Padding="3" FontSize="25" />
+                    <TextBox Grid.Row="0" x:Name="LastName"  FontWeight="ExtraBold" Header="Last Name"    Margin="3" Padding="3"  />
+                    <TextBox Grid.Row="1" x:Name="Street"  FontWeight="ExtraBold"  Header="Street"  Margin="3" Padding="3"  />
+                    <TextBox Grid.Row="2" x:Name="HouseNumber"  FontWeight="ExtraBold" Header="House Number"   Margin="3" Padding="3"  />
                     <ListView Grid.Row="3" x:Name="Borowws"  FontWeight="ExtraBold"   Margin="5" />
                 </Grid>
                 <Grid  Grid.Column="0" x:Name="LeftDeitails"  Padding="50" Margin="25" >
@@ -51,10 +51,10 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Row="0" x:Name="FirstName"  FontWeight="ExtraBold" Header="First Name"   Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="1" x:Name="City"  FontWeight="ExtraBold" Header="City"  Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="2" x:Name="ID"  FontWeight="ExtraBold"  Header="ID"  Margin="3" Padding="3" FontSize="25" />
-                    <TextBox Grid.Row="3" x:Name="Discaount"  FontWeight="ExtraBold" Header="Discount Rate"   Margin="3" Padding="3" FontSize="25" />
+                    <TextBox Grid.Row="0" x:Name="FirstName"  FontWeight="ExtraBold" Header="First Name"   Margin="3" Padding="3"/>
+                    <TextBox Grid.Row="1" x:Name="City"  FontWeight="ExtraBold" Header="City"  Margin="3" Padding="3"  />
+                    <TextBox Grid.Row="2" x:Name="ID"  FontWeight="ExtraBold"  Header="ID"  Margin="3" Padding="3" />
+                    <TextBox Grid.Row="3" x:Name="Discaount"  FontWeight="ExtraBold" Header="Discount Rate"   Margin="3" Padding="3" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="2" Background="SkyBlue"  >

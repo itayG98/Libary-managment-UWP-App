@@ -19,21 +19,21 @@
             <TextBlock FontSize="110" Text="Rehovot Libary"  HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
 
-        <Grid Grid.Row="1" Background="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="125">
+        <Grid Grid.Row="1" Background="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="50">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBox  Grid.Row="0"  Grid.ColumnSpan="2" x:Name="IDBox" Header="Enter your ID" FontSize="40" VerticalAlignment="Center" MinWidth="375" HorizontalAlignment="Center"  />
-            <PasswordBox Grid.Row="1"  Grid.ColumnSpan="2" x:Name="PasswordBox" Header="Enter your password" FontSize="40" VerticalAlignment="Center" MinWidth="375" HorizontalAlignment="Center"/>
-            <Button Grid.Row="2" Grid.Column="0" x:Name="SignUpBtn" Width="120"   Margin="10"  Content="Sign Up" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="25" />
-            <Button Grid.Row="2" Grid.Column="1" x:Name="SignInBtn" Width="120" Margin="10" Content="Sign in" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="25" />
+            <TextBox  Grid.Row="0"  Grid.ColumnSpan="2" x:Name="IDBox" Header="Enter your ID" FontSize="30" VerticalAlignment="Center" MinWidth="375" HorizontalAlignment="Center"  />
+            <PasswordBox Grid.Row="1"  Grid.ColumnSpan="2" x:Name="PasswordBox" Header="Enter your password" FontSize="30" VerticalAlignment="Center" MinWidth="375" HorizontalAlignment="Center"/>
+            <Button Grid.Row="2" Grid.Column="0" x:Name="SignUpBtn" Width="120"   Margin="10"  Content="Sign Up" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" />
+            <Button Grid.Row="2" Grid.Column="1" x:Name="SignInBtn" Width="120" Margin="10" Content="Sign in" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
 
         </Grid>
 
