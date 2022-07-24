@@ -78,7 +78,7 @@ namespace DB_Libary
         public bool Contain(LibaryItem Item)
         {
             if (Item != null)
-                return mookData.LibaryItems.Contains(Item);
+                return mookData.LibaryItems.FirstOrDefault((lib)=>Item.ItemId==lib.ItemId)!=null;
             return false;
         }
 
@@ -165,7 +165,7 @@ namespace DB_Libary
         public bool Contain(Person p)
         {
             if (p != null)
-                return mookData.Persons.Contains(p);
+                return mookData.Persons.FirstOrDefault(person=>person.Id==p.Id)!=null;
             return false;
         }
     }

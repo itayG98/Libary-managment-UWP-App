@@ -36,7 +36,7 @@ namespace DB_Libary
         {
             if (CurrentItem != null && CurrentItem.IsBorrowed == false)
             {
-                return $"Deleted{Repo.Delete(CurrentItem)}";
+                return $"Deleted {Repo.Delete(CurrentItem)}";
             }
             else
                 throw new Exception("Couldnt succseed deleting item");
@@ -51,6 +51,8 @@ namespace DB_Libary
             CurrentItem = chosen as LibaryItem;
             if (CurrentItem == null)
                 throw new Exception("Cant choose non Libary Item object");
+            else if (!Repo.Contain(CurrentItem))
+                throw new Exception("This item is non chooseable");
         }
         public void Sort(IComparer<LibaryItem> comp)
         {
