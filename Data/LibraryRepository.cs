@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace DB_Libary
 {
-    public class LibraryRepository : IRepository<LibaryItem>, IRepository<Person>
+    public class LibaryRepository : IRepository<LibaryItem>, IRepository<Person>
     {
 
         private static LibaryDB mookData;
 
-        static LibraryRepository()
+        static LibaryRepository()
         {
             mookData = LibaryDB.DataInstance;
         }
@@ -30,18 +30,7 @@ namespace DB_Libary
         {
             return GetById(item.ItemId);
         }
-        public LibaryItem Update(LibaryItem item)
-        {
-            LibaryItem old = mookData.LibaryItems.FirstOrDefault(i => i.ItemId == item.ItemId);
-            if (old != null)
-            {
-                mookData.LibaryItems.Remove(old);
-                mookData.LibaryItems.Add(item);
-                return item;
-            }
-            else
-                return null;
-        }
+
         public LibaryItem Delete(LibaryItem item)
         {
             if (item.IsBorrowed == true)
@@ -61,7 +50,6 @@ namespace DB_Libary
         public LibaryItem GetById(Guid id)
         {
             return mookData.LibaryItems.Find(lib => lib.ItemId.CompareTo(id) == 0);
-
         }
         public IQueryable<LibaryItem> GetsSortedBy(IComparer<LibaryItem> comp)
         //Get IComparer instance and sorting the origin list
@@ -136,18 +124,7 @@ namespace DB_Libary
             }
             return null;
         }
-        public Person Update(Person p)
-        {
-            Person old = mookData.Persons.FirstOrDefault(i => i.Equals(p));
-            if (old != null)
-            {
-                mookData.Persons.Remove(old);
-                mookData.Persons.Add(p);
-                return p;
-            }
-            else
-                return null;
-        }
+
         public Person SignIn(Person p, string password)
         {
             if (p.CheckPassword(password))

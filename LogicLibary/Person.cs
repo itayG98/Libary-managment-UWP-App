@@ -75,7 +75,7 @@ namespace LibaryModel
         }
         public bool ChangePassword(string previous, string newPassword)
         {
-            if (newPassword.Length < MAX_PASSWOD_LENGTH) ;
+            if (newPassword.Length < MAX_PASSWOD_LENGTH)
             for (int i = 0; i < newPassword.Length; i++)
             {
                 if (!int.TryParse(newPassword[i].ToString(), out _) && !char.TryParse(newPassword[i].ToString(), out _))

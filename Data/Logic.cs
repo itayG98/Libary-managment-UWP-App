@@ -9,7 +9,7 @@ namespace DB_Libary
 {
     public class Logic
     {
-        public static LibraryRepository Repo;
+        public static LibaryRepository Repo;
         public List<Person> persons;
         public List<LibaryItem> libaryItems;
         private LibaryItem _currentItem;
@@ -22,7 +22,7 @@ namespace DB_Libary
 
         static Logic()
         {
-            Repo = new LibraryRepository();
+            Repo = new LibaryRepository();
         }
         public Logic()
         {

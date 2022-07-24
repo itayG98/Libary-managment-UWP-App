@@ -11,7 +11,6 @@ namespace DB_Libary
         IQueryable<T> GetsSortedBy(IComparer <T>comp);
         IQueryable<T> Get();
         T Get(T item);
-        T Update(T item);
         T Delete(T item);
         bool Contain(T Item);
         Person SignIn(Person p, string password);
