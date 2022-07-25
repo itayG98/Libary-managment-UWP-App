@@ -7,6 +7,10 @@ using LibaryModel;
 
 namespace DB_Libary
 {
+    /// <summary>
+    /// The logic is the only obj the UI works with directly an
+    /// it passed along the digrrent pages
+    /// </summary>
     public class Logic
     {
         public static LibaryRepository Repo;
@@ -45,7 +49,7 @@ namespace DB_Libary
         {
             if (PersonToEdit.Equals(Signed))
                 return "Could not delete sigend user";
-            string msg = "Deleted"+Repo.Delete(PersonToEdit).ToString();
+            string msg = "Deleted "+Repo.Delete(PersonToEdit).ToString();
             ClearPerson();
             UpdateLogicLists();
             return msg;
