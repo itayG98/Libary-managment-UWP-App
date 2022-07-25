@@ -71,7 +71,7 @@ namespace LIbaryAppTesting
         {
             LibaryRepository Repo = new LibaryRepository();
             LibaryItem libaryItem = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
-            Person person = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
+            Person person = new Costumer("342432424", "Fname1", "Lname", "Rehovot", "none");
 
             Repo.Add(person);
             Repo.Add(libaryItem);
@@ -102,8 +102,9 @@ namespace LIbaryAppTesting
         public void EmployeeSignUp()
         {
             LibaryRepository Repo = new LibaryRepository();
-            Assert.IsNotNull(Repo.EmployeeSignUp("999984131", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456"));
-            Assert.ThrowsException<Exception>(() => (Repo.EmployeeSignUp("999984131", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456")));
+            Assert.IsNotNull(Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456"));
+            Assert.IsNotNull(Repo.GetById("342432424"));
+            Assert.ThrowsException<Exception>(() => (Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456")));
         }
 
         [TestMethod]
@@ -135,9 +136,12 @@ namespace LIbaryAppTesting
         public void CurrentItem()
         {
             Logic logic = new Logic();
-            LibaryItem lib = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
-            logic.ChooseItem(lib);
-            Assert.AreEqual(lib, logic.CurrentItem);
+            Journal joExicst =(Journal)logic.AddJournal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
+            Journal joNotExicst = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
+            
+            logic.ChooseItem(joExicst);
+            Assert.AreEqual(joExicst, logic.CurrentItem);
+            Assert.ThrowsException<Exception>(()=>logic.ChooseItem(joNotExicst));
         }
         [TestMethod]
         public void ChooseAndDeleteCurrentItem()
@@ -181,11 +185,11 @@ namespace LIbaryAppTesting
         public void SignUpPersons()
         {
             Logic logic = new Logic();
-            Assert.IsNotNull(logic.CostumerSignUp("999984131", "Fname1", "Lname", "Rehovot", "none"));
-            Assert.IsNotNull(logic.EmployeSignUp("999479033", "Fname1", "Lname", "Rehovot", "none", "12345"));
+            Assert.IsNotNull(logic.CostumerSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", 13));
+            Assert.IsNotNull(logic.EmployeSignUp("342432119", "Fname1", "Lname", "Rehovot", "none", "12345", 13));
 
-            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "999984131" && p is Costumer));
-            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "999479033" && p is Employye));
+            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432424" && p is Costumer));
+            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432119" && p is Employye));
         }
 
         [TestMethod]
@@ -207,7 +211,7 @@ namespace LIbaryAppTesting
         public void BorrowAndReturn()
         {
             Logic logic = new Logic();
-            Book book = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info",150, 965);
+            Book book = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info", 150, 965);
 
             Assert.IsTrue(logic.TrySignIn("999268121", "1234ABCD"));
 
@@ -221,14 +225,14 @@ namespace LIbaryAppTesting
         }
 
         [TestMethod]
-        public void MyItems() 
+        public void MyItems()
         {
             Logic logic = new Logic();
             Book book1 = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info", 150, 965);
             Book book2 = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info", 150, 965);
             Book book3 = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info", 150, 965);
             Book book4 = (Book)logic.AddBook(001, 67, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", "Info", 150, 965);
-            List <LibaryItem> BorrowedBooks = new List<LibaryItem>  { book1, book2, book3, book4 };
+            List<LibaryItem> BorrowedBooks = new List<LibaryItem> { book1, book2, book3, book4 };
             Assert.IsTrue(logic.TrySignIn("999268121", "1234ABCD"));
 
             logic.ChooseItem(book1);
