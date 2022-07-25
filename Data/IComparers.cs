@@ -50,7 +50,7 @@ namespace DB_Libary
 
     //Persons Icomparers
 
-    public class IComparerFName : IComparer<Person>
+    public class IComparerFirstName : IComparer<Person>
     {
         public int Compare(Person x, Person y)
         {
@@ -58,7 +58,7 @@ namespace DB_Libary
         }
     }
 
-    public class IComparerByFNameReverse : IComparer<Person>
+    public class IComparerByFisrtNameReverse : IComparer<Person>
     {
         public int Compare(Person x, Person y)
         {

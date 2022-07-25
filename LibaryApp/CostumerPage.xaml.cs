@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Navigation;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// The page let the user look for a libary items and borrow
     /// </summary>
     public sealed partial class CostumerPage : Page
     {
@@ -31,9 +31,29 @@ namespace LibaryApp
             _viewToggle = false;
         }
 
+        //AppBarButton functions
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            logic.SignOut();
+            Frame.Navigate(typeof(MainPage), logic);
+            return;
+        }
         private void ChangeDetails_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditPerson), logic);
+        }
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            Frame.Navigate(typeof(ChangePassword), logic);
+            return;
+        }
+
+        //List veiw functions
+        public void UpdateMenu()
+        {
+            ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib.IsBorrowed == false);
         }
         private void ItemsListVeiw_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -47,6 +67,8 @@ namespace LibaryApp
             }
             Frame.Navigate(typeof(LibaryItemOrderPage), logic);
         }
+
+        //Sorting or show partion of libary items
         private void ViewToggle(object sender, RoutedEventArgs e)
         {
             if (!_viewToggle) //Current My items => libary
@@ -61,23 +83,6 @@ namespace LibaryApp
                 View.Content = "My items";
             }
             _viewToggle = !_viewToggle;
-        }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            Frame.Navigate(typeof(ChangePassword), logic);
-            return;
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            logic.SignOut();
-            Frame.Navigate(typeof(MainPage), logic);
-            return;
-        }
-        public void UpdateMenu()
-        {
-            ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib.IsBorrowed == false);
         }
         private void Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -108,6 +113,8 @@ namespace LibaryApp
             else
                 UpdateMenu();
         }
+
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;

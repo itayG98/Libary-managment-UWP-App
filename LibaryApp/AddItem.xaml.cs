@@ -11,7 +11,8 @@ using Windows.UI.Xaml.Navigation;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Only employye can acces this page
+    /// validate and create new Libary Item in the MoockData class
     /// </summary>
     public sealed partial class AddItem : Page
     {
@@ -31,6 +32,29 @@ namespace LibaryApp
             BookBtn.Click += BookBtn_Click;
             JournalBtn.Click += JournalBtn_Click;
         }
+
+        //AppBarButton functions
+        private void Libary_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            if (logic.Signed as Costumer != null)
+                Frame.Navigate(typeof(CostumerPage), logic);
+            else
+                Frame.Navigate(typeof(EmployePage), logic);
+        }
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            Frame.Navigate(typeof(ChangePassword), logic);
+        }
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            logic.SignOut();
+            Frame.Navigate(typeof(MainPage), logic);
+        }
+
+        //Choose book or journal
         private void JournalBtn_Click(object sender, RoutedEventArgs e)
         {
             IsBook = false;
@@ -55,6 +79,8 @@ namespace LibaryApp
             RightDeitails.RowDefinitions.Clear();
             GenerateBookFields();
         }
+
+        //Generate apropriate fields
         private void GenerateJournalFields()
         {
             //public Journal( name,  printedDate,  frequancy,  price , string editors)
@@ -120,6 +146,8 @@ namespace LibaryApp
             RightDeitails.Children.Add(Price);
             RightDeitails.Children.Add(DiscountPercentage);
         }
+
+        //Sumbit and validate
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             if (IsBook != null && IsBook == true)
@@ -181,25 +209,6 @@ namespace LibaryApp
             else
                 return false;
 
-        }
-        private void Libary_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            if (logic.Signed as Costumer != null)
-                Frame.Navigate(typeof(CostumerPage), logic);
-            else
-                Frame.Navigate(typeof(EmployePage), logic);
-        }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            Frame.Navigate(typeof(ChangePassword), logic);
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            logic.SignOut();
-            Frame.Navigate(typeof(MainPage), logic);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

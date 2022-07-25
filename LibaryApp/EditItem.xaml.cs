@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Navigation;
 namespace LibaryApp
 {
     /// <summary>
-    /// Edit Details of person or libaryItem
+    /// Edit Details of libaryItem
     /// Avilable only for Employees
     /// </summary>
     public sealed partial class EditItem : Page
@@ -28,6 +28,55 @@ namespace LibaryApp
             Delete.IsTabStop=false;
         }
 
+        //AppBarButton functions
+        private void Libary_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            if (logic.Signed as Costumer != null)
+                Frame.Navigate(typeof(CostumerPage), logic);
+            else
+                Frame.Navigate(typeof(EmployePage), logic);
+        }
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            Frame.Navigate(typeof(ChangePassword), logic);
+        }
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            Frame.Navigate(typeof(MainPage), logic);
+        }
+
+
+        public void UpdateData()
+        //Update the fields
+        {
+            Congrat.Text = logic.CurrentItem.Name;
+            DiscountF.Text = $"{logic.CurrentItem.DiscountPercentage}";
+            PrintedInF.Date = logic.CurrentItem.PrintedDate;
+            StutusF.Text = logic.CurrentItem.IsBorrowed ? "Unavilable" : "Avilable";
+            CodeF.Text = $"{logic.CurrentItem.ItemId}";
+            PriceF.Text = $"{logic.CurrentItem.Price}";
+            NameF.Text = logic.CurrentItem.Name;
+        }
+        private void DisableFields()
+        //disabled important field's 
+        {
+            if (logic.CurrentItem != null)
+            {
+                //Disabled
+                CodeF.IsReadOnly = true;
+                StutusF.IsReadOnly = true;
+            }
+            else
+            {
+                if (logic.Signed as Employye != null)
+                    Frame.Navigate(typeof(EmployePage), logic);
+                else
+                    Frame.Navigate(typeof(CostumerPage), logic);
+            }
+        }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -54,61 +103,16 @@ namespace LibaryApp
             temp.PrintedDate = PrintedInF.Date.Date;
             UpdateData();
         }
-        private void Libary_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            if (logic.Signed as Costumer != null)
-                Frame.Navigate(typeof(CostumerPage), logic);
-            else
-                Frame.Navigate(typeof(EmployePage), logic);
-        }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            Frame.Navigate(typeof(ChangePassword), logic);
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            Frame.Navigate(typeof(MainPage), logic);
-        }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
             if (logic != null && logic.Signed as Employye != null)
             {
-                InsertFields();
+                DisableFields();
+                UpdateData();
             }
             else
                 Frame.Navigate(typeof(MainPage), logic);
-        }
-        private void InsertFields()
-        //Insert field's names and disableed some
-        {
-            if (logic.CurrentItem != null)
-            {
-                //Disabled
-                CodeF.IsReadOnly = true;
-                StutusF.IsReadOnly = true;
-            }
-            else
-            {
-                if (logic.Signed as Employye != null)
-                    Frame.Navigate(typeof(EmployePage), logic);
-                else
-                    Frame.Navigate(typeof(CostumerPage), logic);
-            }
-            UpdateData();
-        }
-        public void UpdateData()
-        {
-            Congrat.Text = logic.CurrentItem.Name;
-            DiscountF.Text = $"{logic.CurrentItem.DiscountPercentage}";
-            PrintedInF.Date = logic.CurrentItem.PrintedDate;
-            StutusF.Text = logic.CurrentItem.IsBorrowed ? "Unavilable" : "Avilable";
-            CodeF.Text = $"{logic.CurrentItem.ItemId}";
-            PriceF.Text = $"{logic.CurrentItem.Price}";
-            NameF.Text = logic.CurrentItem.Name;
         }
         public async void ShowAlert(string msg)
         {

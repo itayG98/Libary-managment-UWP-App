@@ -21,7 +21,12 @@ using Windows.UI.Xaml.Navigation;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Edit valid persons details page according to the fieldes
+    /// 
+    /// if it is a Costumer user let him edit his fields
+    /// if it is employee user let him edit more fields of himself 
+    /// or others if navigated through the list view of persons
+    /// 
     /// </summary>
     public sealed partial class EditPerson : Page
     {
@@ -34,9 +39,29 @@ namespace LibaryApp
             Libary.Click += Libary_Click;
             Submit.Click += Submit_Click;
         }
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        //AppBarButton functions
+        private void Libary_Click(object sender, RoutedEventArgs e)
         {
+            logic.ClearPerson();
+            if (logic.Signed as Costumer != null)
+                Frame.Navigate(typeof(CostumerPage), logic);
+            else
+                Frame.Navigate(typeof(EmployePage), logic);
+        }
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearPerson();
+            Frame.Navigate(typeof(ChangePassword), logic);
+        }
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearPerson();
+            Frame.Navigate(typeof(MainPage), logic);
+        }
 
+        private void Submit_Click(object sender, RoutedEventArgs e)
+            //validate the data if so update
+        {
             if (logic.NameValidity(FirstName.Text))
                 logic.PersonToEdit.FirstName = FirstName.Text;
             if (logic.NameValidity(LastName.Text))
@@ -57,24 +82,6 @@ namespace LibaryApp
                     logic.PersonToEdit.DiscountPerCent = discountPer;
             }
             LoadData();
-        }
-        private void Libary_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearPerson();
-            if (logic.Signed as Costumer != null)
-                Frame.Navigate(typeof(CostumerPage), logic);
-            else
-                Frame.Navigate(typeof(EmployePage), logic);
-        }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearPerson();
-            Frame.Navigate(typeof(ChangePassword), logic);
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearPerson();
-            Frame.Navigate(typeof(MainPage), logic);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -102,6 +109,7 @@ namespace LibaryApp
                 Discaount.IsEnabled = false;
         }
         public void LoadData()
+            //loade current data of personToEdit
         {
             Congrat.Text = logic.GetName;
             FirstName.Text = logic.PersonToEdit.FirstName;

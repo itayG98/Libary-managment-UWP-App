@@ -43,7 +43,7 @@ namespace DB_Libary
         }
         public void UpdateLogicLists()
         {
-            persons = Repo.GetsSortedBy(new IComparerFName()).ToList();
+            persons = Repo.GetsSortedBy(new IComparerFirstName()).ToList();
             libaryItems = Repo.GetsSortedBy(new IComparerByItemName()).ToList();
         }
         public void ChooseItem(object chosen)

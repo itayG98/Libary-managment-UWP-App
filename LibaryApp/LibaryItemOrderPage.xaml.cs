@@ -13,7 +13,9 @@ using LibaryModel;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// A page to borrow buy or return
+    /// If the signed user is employee the edit item is navigating to EditItem Page
+    /// if the user is costumer it navigates to edit peron
     /// </summary>
     public sealed partial class LibaryItemOrderPage : Page
     {
@@ -31,6 +33,7 @@ namespace LibaryApp
             ChangeDetails.Click += ChangeDetails_Click;
         }
 
+        //AppBarButton funcions
         private void ChangeDetails_Click(object sender, RoutedEventArgs e)
         {
             if (logic.Signed as Employye != null && logic.libaryItems.Contains(logic.CurrentItem))

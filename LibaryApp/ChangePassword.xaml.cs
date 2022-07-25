@@ -27,6 +27,7 @@ namespace LibaryApp
             Libary.Click += ToLibary_Click;
         }
 
+        //AppBarButton functions
         private void ToLibary_Click(object sender, RoutedEventArgs e)
         {
             logic.ClearItem();
@@ -35,18 +36,17 @@ namespace LibaryApp
             else
                 Frame.Navigate(typeof(EmployePage), logic);
         }
-
         private void ChangeDetails_Click(object sender, RoutedEventArgs e)
         {
             logic.ClearItem();
             Frame.Navigate(typeof(EditItem), logic);
         }
-
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
             logic.ClearItem();
             Frame.Navigate(typeof(MainPage), logic);
         }
+
 
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +67,6 @@ namespace LibaryApp
                 Congrat.Text = "Please try again";
             }
         }
-
         public async void ShowAlert(string msg)
         {
             await new MessageDialog(msg).ShowAsync();

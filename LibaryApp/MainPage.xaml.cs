@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Navigation;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Sign in page with SignUp navigaton option
     /// </summary>
     public sealed partial class MainPage : Page
     {

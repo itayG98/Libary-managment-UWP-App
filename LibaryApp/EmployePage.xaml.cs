@@ -15,7 +15,12 @@ using Windows.UI.Xaml;
 namespace LibaryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Employye page
+    /// An Employye can brorrow/buy a libay items or check edit or delete persons or Items
+    /// 
+    /// The list view has 2 states
+    /// Showing users of the systems
+    /// showing all libary items includes the ones which currently borrowed
     /// </summary>
     public sealed partial class EmployePage : Page
     {
@@ -27,8 +32,8 @@ namespace LibaryApp
             this.InitializeComponent();
             SortItems.SelectionChanged += SortItemsChanged;
             SortPerson.SelectionChanged += SortPersonsChanged;
-            LibaryItemsType.SelectionChanged += BooksOrJournal_SelectionChanged;
-            CostumerOrEmployees.SelectionChanged += CostumerOrEmployees_SelectionChanged;
+            LibaryItemsType.SelectionChanged += LibaryItem_SelectionChanged;
+            CostumerOrEmployees.SelectionChanged += Persons_SelectionChanged;
             PersonsOrItems.Click += PersonsOrItemsToggle;
             MyItemsOrLibary.Click += MyItemsOrLibaryToggle;
             SignOut.Click += SignOut_Click;
@@ -41,11 +46,32 @@ namespace LibaryApp
             ShowMyItems = false;
             ShowPersons = false;
         }
+
+        //AppBarButton
         private void Addbook_Click(object sender, RoutedEventArgs e)
         {
             if (logic.Signed as Employye != null)
                 Frame.Navigate(typeof(AddItem), logic);
         }
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            Frame.Navigate(typeof(ChangePassword), logic);
+            return;
+        }
+        private void ChangeDetails_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditPerson), logic);
+        }
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ClearItem();
+            logic.SignOut();
+            Frame.Navigate(typeof(MainPage), logic);
+            return;
+        }
+
+        //List veiw functions
         public void UpdateMenu()
         {
             if (!ShowPersons)
@@ -54,6 +80,7 @@ namespace LibaryApp
                 ItemsListVeiw.ItemsSource = logic.persons;
         }
         private void ItemsListVeiw_ItemClick(object sender, ItemClickEventArgs e)
+        //Clicking on specific item in the list view. It can be Person or Libary Item   
         {
             if (e.ClickedItem as LibaryItem != null)
             {
@@ -66,34 +93,35 @@ namespace LibaryApp
                 Frame.Navigate(typeof(EditPerson), logic);
             }
         }
-        private void CostumerOrEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            // Selecet partion of persons
         {
-            if (CostumerOrEmployees.SelectedItem == AllPersons)
-                ItemsListVeiw.ItemsSource = logic.persons;
-            else if (CostumerOrEmployees.SelectedItem == OnlyCostumers)
+            if (CostumerOrEmployees.SelectedItem == OnlyCostumers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Costumer);
             else if (CostumerOrEmployees.SelectedItem == OnlyEmployees)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Employye);
             else if (CostumerOrEmployees.SelectedItem == ShowBorrowers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p.BorrowingCount > 0);
+            else
+                ItemsListVeiw.ItemsSource = logic.persons;
         }
-        private void BooksOrJournal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LibaryItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        // Selecet partion of Libary Items
         {
             if (LibaryItemsType.SelectedItem == OnlyBooks)
                 ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib is Book);
             else if (LibaryItemsType.SelectedItem == OnlyJournals)
                 ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib is Journal);
-            else if (LibaryItemsType.SelectedItem == AllItems)
+            else
                 ItemsListVeiw.ItemsSource = logic.libaryItems;
         }
         private void SortPersonsChanged(object sender, SelectionChangedEventArgs e)
+            //Sort the persons list and show it
         {
-            if (SortPerson.SelectedItem == SortByFName)
-                logic.Sort(new IComparerFName());
-            else if (SortPerson.SelectedItem == SortByFNameReverse)
-                logic.Sort(new IComparerByFNameReverse());
+            if (SortPerson.SelectedItem == SortByFNameReverse)
+                logic.Sort(new IComparerByFisrtNameReverse());
             else
-                return;
+                logic.Sort(new IComparerFirstName());
 
             if (CostumerOrEmployees.SelectedItem == OnlyCostumers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Costumer);
@@ -102,33 +130,32 @@ namespace LibaryApp
             else if (CostumerOrEmployees.SelectedItem == ShowBorrowers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p.BorrowingCount > 0);
             else
-            {
-                CostumerOrEmployees.SelectedItem = AllPersons;
-                ItemsListVeiw.ItemsSource = logic.persons;
-            }
+                ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Person);
         }
         private void SortItemsChanged(object sender, SelectionChangedEventArgs e)
+        //Sort the Items list and show it
         {
-            if (SortItems.SelectedItem == SortByName)
-                logic.Sort(new IComparerByItemName());
-            else if (SortItems.SelectedItem == SortByNameReverse)
+            if (SortItems.SelectedItem == SortByNameReverse)
                 logic.Sort(new IComparerByItemNameReverse());
             else if (SortItems.SelectedItem == SortByPrice)
                 logic.Sort(new IComparerByPrice());
             else if (SortItems.SelectedItem == SortByPriceReverse)
                 logic.Sort(new IComparerByPriceReverse());
+            else
+            {
+                SortItems.SelectedItem = SortByName;
+                logic.Sort(new IComparerByItemName());
+            }
 
             if (LibaryItemsType.SelectedItem == OnlyBooks)
                 ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib is Book);
             else if (LibaryItemsType.SelectedItem == OnlyJournals)
                 ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib is Journal);
             else
-            {
-                LibaryItemsType.SelectedItem = AllItems;
-                ItemsListVeiw.ItemsSource = logic.libaryItems;
-            }
+                ItemsListVeiw.ItemsSource = logic.libaryItems.FindAll(lib => lib is LibaryItem);
         }
         private void PersonsOrItemsToggle(object sender, RoutedEventArgs e)
+            //Toggle btn wether to show persons or Items
         {
             if (!ShowPersons) //Current LibaryItems  => Persons
             {
@@ -136,23 +163,17 @@ namespace LibaryApp
                 SortItems.Visibility = Visibility.Collapsed;
                 LibaryItemsType.Visibility = Visibility.Collapsed;
                 SortPerson.Visibility = Visibility.Visible;
-                SortPerson.SelectedItem = null;
                 CostumerOrEmployees.Visibility = Visibility.Visible;
-                CostumerOrEmployees.SelectedItem = null;
                 MyItemsOrLibary.Visibility = Visibility.Collapsed;
-
-                PersonsOrItems.Content = "Avilable items";
+                PersonsOrItems.Content = "Items";
             }
             else //Current Persons => LibaryItems
             {
                 //Hide Persons CBX show LibaryItems CBX
                 SortItems.Visibility = Visibility.Visible;
-                SortItems.SelectedItem = null;
                 LibaryItemsType.Visibility = Visibility.Visible;
-                LibaryItemsType.SelectedItem = null;
                 SortPerson.Visibility = Visibility.Collapsed;
                 CostumerOrEmployees.Visibility = Visibility.Collapsed;
-                ItemsListVeiw.ItemsSource = null;
                 MyItemsOrLibary.Visibility = Visibility.Visible;
                 PersonsOrItems.Content = "Persons";
             }
@@ -160,6 +181,7 @@ namespace LibaryApp
             UpdateMenu();
         }
         private void MyItemsOrLibaryToggle(object sender, RoutedEventArgs e)
+        //Toggle btn wether to show All libary Items or users Items
         {
             if (!ShowPersons)
             {
@@ -179,23 +201,7 @@ namespace LibaryApp
                 ShowMyItems = !ShowMyItems;
             }
         }
-        private void ChangeDetails_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(EditPerson), logic);
-        }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            Frame.Navigate(typeof(ChangePassword), logic);
-            return;
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            logic.ClearItem();
-            logic.SignOut();
-            Frame.Navigate(typeof(MainPage), logic);
-            return;
-        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
@@ -210,10 +216,6 @@ namespace LibaryApp
                 Frame.Navigate(typeof(MainPage));
             }
             Congrat.Text = logic.GetName;
-        }
-        public async void ShowAlert(string msg)
-        {
-            await new MessageDialog(msg).ShowAsync();
         }
     }
 }
