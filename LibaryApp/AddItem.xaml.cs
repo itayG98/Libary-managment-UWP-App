@@ -181,7 +181,7 @@ namespace LibaryApp
         {
             if (!double.TryParse(Price.Text, out double price))
                 return false;
-            if (!logic.NameValidity(ItemsName.Text))
+            if (!logic.CharectersOnly(ItemsName.Text))
                 return false;
             if (Freq.SelectedItem == null || PrintDate.SelectedDate == null)
                 return false;
@@ -203,11 +203,11 @@ namespace LibaryApp
                 return false;
             if (!int.TryParse(Country.SelectedItem.ToString(), out int CountryCode))
                 return false;
-            if (!logic.NameValidity(ItemsName.Text))
+            if (!logic.CharectersOnly(ItemsName.Text))
                 return false;
             if (PrintDate.Date.Date == null)
                 return false;
-            if (!logic.NameValidity(Aouthors.Text))
+            if (!logic.CharectersOnly(Aouthors.Text))
                 return false;
             if (!double.TryParse(Price.Text, out double price))
                 return false;

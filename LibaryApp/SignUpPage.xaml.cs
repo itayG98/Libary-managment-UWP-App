@@ -95,7 +95,7 @@ namespace LibaryApp
             }
             Password.Foreground = new SolidColorBrush(Colors.Black);
             ConiformPassword.Foreground = new SolidColorBrush(Colors.Black);
-            if (!logic.NameValidity(Fname.Text) || !logic.NameValidity(Lname.Text))
+            if (!logic.CharectersOnly(Fname.Text) || !logic.CharectersOnly(Lname.Text))
             {
                 Lname.Foreground = new SolidColorBrush(Colors.Red);
                 Fname.Foreground = new SolidColorBrush(Colors.Red);
@@ -103,13 +103,13 @@ namespace LibaryApp
             }
             Lname.Foreground = new SolidColorBrush(Colors.Black);
             Fname.Foreground = new SolidColorBrush(Colors.Black);
-            if (!logic.NameValidity(City.Text))
+            if (!logic.CharectersOnly(City.Text))
             {
                 City.Foreground = new SolidColorBrush(Colors.Red);
                 return false;
             }
             City.Foreground = new SolidColorBrush(Colors.Black);
-            if (!logic.NameValidity(Street.Text))
+            if (!logic.CharectersOnly(Street.Text))
             {
                 Street.Foreground = new SolidColorBrush(Colors.Red);
                 return false;

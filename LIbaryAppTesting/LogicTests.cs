@@ -167,7 +167,7 @@ namespace LIbaryAppTesting
             Person Cos = logic.CostumerSignUp("222111114", "Fname1 ", "Lname", "Rehovot", "none", 10);
             Person Emp =logic.EmployeSignUp("222222226", "Fname1 ", "Lname", "Rehovot", "none", "12345", 10);
             logic.PersonToEdit = Cos;
-            Assert.IsTrue(logic.DeletePerson() is string);
+            Assert.IsTrue(logic.DeletePersonToEdit() is string);
             Assert.IsNull(logic.persons.Find((p) => p.Id == "222111114"));
         }
         [TestMethod]
@@ -255,7 +255,7 @@ namespace LIbaryAppTesting
             logic.ChooseItem(book4);
             Assert.IsTrue(logic.Borrow());
 
-            List<LibaryItem> books = logic.MyItems();
+            List<LibaryItem> books = logic.GetMyItems();
             for (int i = 0; i < BorrowedBooks.Count; i++)
                 Assert.IsTrue(books[i].Equals(BorrowedBooks[i]));
             Assert.IsTrue(books.Count == BorrowedBooks.Count);

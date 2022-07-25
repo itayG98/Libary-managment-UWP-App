@@ -188,7 +188,7 @@ namespace LibaryApp
                 if (!ShowMyItems) //Current My items => libary
                 {
                     logic.UpdateLogicLists();
-                    ItemsListVeiw.ItemsSource = logic.MyItems();
+                    ItemsListVeiw.ItemsSource = logic.GetMyItems();
                     MyItemsOrLibary.Content = "Avilable items";
                 }
                 else //Current libary => My items

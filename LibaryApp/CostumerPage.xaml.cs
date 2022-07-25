@@ -73,7 +73,7 @@ namespace LibaryApp
         {
             if (!_viewToggle) //Current My items => libary
             {
-                ItemsListVeiw.ItemsSource = logic.MyItems();
+                ItemsListVeiw.ItemsSource = logic.GetMyItems();
                 View.Content = "Avilable items";
             }
             else //Current libary => My items

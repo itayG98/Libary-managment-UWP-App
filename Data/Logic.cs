@@ -36,36 +36,12 @@ namespace DB_Libary
             UpdateLogicLists();
         }
 
-        public string DeleteCurrentItem()
-        {
-            if (CurrentItem != null && CurrentItem.IsBorrowed == false)
-            {
-                return $"Deleted {Repo.Delete(CurrentItem)}";
-            }
-            else
-                throw new Exception("Couldnt succseed deleting item");
-        }
-        public string DeletePerson() 
-        {
-            if (PersonToEdit.Equals(Signed))
-                return "Could not delete sigend user";
-            string msg = "Deleted "+Repo.Delete(PersonToEdit).ToString();
-            ClearPerson();
-            UpdateLogicLists();
-            return msg;
-        }
+        //Logic methods
         public void UpdateLogicLists()
+            //Updates the list from the database
         {
             persons = Repo.GetsSortedBy(new IComparerFirstName()).ToList();
             libaryItems = Repo.GetsSortedBy(new IComparerByItemName()).ToList();
-        }
-        public void ChooseItem(object chosen)
-        {
-            CurrentItem = chosen as LibaryItem;
-            if (CurrentItem == null)
-                throw new Exception("Cant choose non Libary Item object");
-            else if (!Repo.Contain(CurrentItem))
-                throw new Exception("This item is non chooseable");
         }
         public void Sort(IComparer<LibaryItem> comp)
         {
@@ -75,46 +51,24 @@ namespace DB_Libary
         {
             persons.Sort(comp);
         }
+
+        // Editing items choosing
+
+        public void ClearItem()
+        {
+            CurrentItem = null;
+        }
+        public void ChooseItem(object chosen)
+        {
+            CurrentItem = chosen as LibaryItem;
+            if (CurrentItem == null)
+                throw new Exception("Cant choose non Libary Item object");
+            else if (!Repo.Contain(CurrentItem))
+                throw new Exception("This item is non chooseable");
+        }
         public void ClearPerson()
         {
             PersonToEdit = null;
-        }
-        public bool TrySignIn(string id, string password)
-        {
-            if (!Person.Validation(id))
-                return false;
-            Person TrySigned = persons.Find((p) => p.Id == id);
-            if (TrySigned != null)
-            {
-                Signed = Repo.SignIn(TrySigned, password);
-                if (Signed != null)
-                    return true;
-            }
-            return false;
-        }
-        public Person CostumerSignUp(string id, string fname, string lname, string city, string street, int houseNumber = -1, string password = "1234ABCD")
-        {
-            Signed = Repo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
-            if (Signed == null)
-                throw new Exception("Could'nt Sign you up check fields");
-            UpdateLogicLists();
-            return Signed;
-        }
-        public Person EmployeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
-        {
-            Signed = Repo.EmployeeSignUp(id, fname, lname, city, street, ManagerPassword, houseNumber, password);
-            if (Signed == null)
-                throw new Exception("Can't Sign you as employee wrong password");
-            UpdateLogicLists();
-            return Signed;
-        }
-        public void SignOut()
-        {
-            Signed = null;
-        }
-        public List<LibaryItem> MyItems()
-        {
-            return libaryItems.FindAll((lib) => Signed.BorrowingList.Contains(lib.ItemId));
         }
         public string AuthorOrEditors()
         {
@@ -128,6 +82,35 @@ namespace DB_Libary
                 Journal temp = (Journal)CurrentItem;
                 return string.Join(",", temp.Editors);
             }
+        }
+
+        //Iser interactions
+        public bool TrySignIn(string id, string password)
+        {
+            if (!Person.Validation(id))
+                return false;
+            Person TrySigned = persons.Find((p) => p.Id == id);
+            if (TrySigned != null)
+            {
+                Signed = Repo.SignIn(TrySigned, password);
+                if (Signed != null)
+                    return true;
+            }
+            return false;
+        }
+        public void SignOut()
+        {
+            Signed = null;
+        }
+        public bool CharectersOnly(string s)
+            //Validate a string which spouse to cantain only Charecters
+        {
+            foreach (char ch in s)
+            {
+                if (!char.IsLetter(ch) && ch != ' ')
+                    return false;
+            }
+            return true;
         }
         public bool Buy()
         {
@@ -166,19 +149,12 @@ namespace DB_Libary
             }
             return false;
         }
-        public void ClearItem()
+        public List<LibaryItem> GetMyItems()
         {
-            CurrentItem = null;
+            return libaryItems.FindAll((lib) => Signed.BorrowingList.Contains(lib.ItemId));
         }
-        public bool NameValidity(string s)
-        {
-            foreach (char ch in s)
-            {
-                if (!char.IsLetter(ch) && ch != ' ')
-                    return false;
-            }
-            return true;
-        }
+
+        //Adding to database
         public LibaryItem AddJournal(string name, DateTime date, Frequancy Freq, string editors, double price = Journal.DEFAULT_JOURNAL_PRICE)
         {
             return Repo.Add(new Journal(name, date, Freq, editors, price));
@@ -188,6 +164,42 @@ namespace DB_Libary
             if (ISBN.PublishersDict.ContainsValue(publisher) && ISBN.PublishersDict.ContainsValue(country))
                 publisher = country = 0;
             return Repo.Add(new Book(publisher, serialNum, name, printedDate, authors, description, price, discountRate, country));
+        }
+        public Person CostumerSignUp(string id, string fname, string lname, string city, string street, int houseNumber = -1, string password = "1234ABCD")
+        {
+            Signed = Repo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
+            if (Signed == null)
+                throw new Exception("Could'nt Sign you up check fields");
+            UpdateLogicLists();
+            return Signed;
+        }
+        public Person EmployeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
+        {
+            Signed = Repo.EmployeeSignUp(id, fname, lname, city, street, ManagerPassword, houseNumber, password);
+            if (Signed == null)
+                throw new Exception("Can't Sign you as employee wrong password");
+            UpdateLogicLists();
+            return Signed;
+        }
+        
+        //Delete form DataBase
+        public string DeletePersonToEdit() 
+        {
+            if (PersonToEdit.Equals(Signed))
+                return "Could not delete sigend user";
+            string msg = "Deleted "+Repo.Delete(PersonToEdit).ToString();
+            ClearPerson();
+            UpdateLogicLists();
+            return msg;
+        }
+        public string DeleteCurrentItem()
+        {
+            if (CurrentItem != null && CurrentItem.IsBorrowed == false)
+            {
+                return $"Deleted {Repo.Delete(CurrentItem)}";
+            }
+            else
+                throw new Exception("Couldnt succseed deleting item");
         }
     }
 }

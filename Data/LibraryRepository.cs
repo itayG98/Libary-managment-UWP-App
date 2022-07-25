@@ -16,21 +16,25 @@ namespace DB_Libary
         }
 
         //Libary Items implementation
-        public LibaryItem Add(LibaryItem item)
-        {
-            LibaryItem ToAdd = mookData.LibaryItems.FirstOrDefault(i => i.ItemId == item.ItemId);
-            if (ToAdd == null)
-            {
-                mookData.LibaryItems.Add(item);
-                return item;
-            }
-            return null;
-        }
+
         public LibaryItem Get(LibaryItem item)
         {
             return GetById(item.ItemId);
         }
-
+        public IQueryable<LibaryItem> Get()
+        {
+            return mookData.LibaryItems.AsQueryable();
+        }
+        public IQueryable<LibaryItem> GetsSortedBy(IComparer<LibaryItem> comp)
+        //Get IComparer instance and sorting the origin list
+        {
+            mookData.LibaryItems.Sort(comp);
+            return Get();
+        }
+        public LibaryItem GetById(Guid id)
+        {
+            return mookData.LibaryItems.Find(lib => lib.ItemId.CompareTo(id) == 0);
+        }
         public LibaryItem Delete(LibaryItem item)
         {
             if (item.IsBorrowed == true)
@@ -43,19 +47,21 @@ namespace DB_Libary
             }
             return null;
         }
-        public IQueryable<LibaryItem> Get()
+        public bool Contain(LibaryItem Item)
         {
-            return mookData.LibaryItems.AsQueryable();
+            if (Item != null)
+                return mookData.LibaryItems.FirstOrDefault((lib)=>Item.ItemId==lib.ItemId)!=null;
+            return false;
         }
-        public LibaryItem GetById(Guid id)
+        public LibaryItem Add(LibaryItem item)
         {
-            return mookData.LibaryItems.Find(lib => lib.ItemId.CompareTo(id) == 0);
-        }
-        public IQueryable<LibaryItem> GetsSortedBy(IComparer<LibaryItem> comp)
-        //Get IComparer instance and sorting the origin list
-        {
-            mookData.LibaryItems.Sort(comp);
-            return Get();
+            LibaryItem ToAdd = mookData.LibaryItems.FirstOrDefault(i => i.ItemId == item.ItemId);
+            if (ToAdd == null)
+            {
+                mookData.LibaryItems.Add(item);
+                return item;
+            }
+            return null;
         }
         public LibaryItem Borrow(Person p, LibaryItem lib)
         {
@@ -75,15 +81,10 @@ namespace DB_Libary
             }
             return null;
         }
-        public bool Contain(LibaryItem Item)
-        {
-            if (Item != null)
-                return mookData.LibaryItems.FirstOrDefault((lib)=>Item.ItemId==lib.ItemId)!=null;
-            return false;
-        }
 
 
         //Persons implementation
+
         IQueryable<Person> IRepository<Person>.Get()
         {
             return mookData.Persons.AsQueryable();
@@ -114,6 +115,12 @@ namespace DB_Libary
             }
             return null;
         }
+        public bool Contain(Person p)
+        {
+            if (p != null)
+                return mookData.Persons.FirstOrDefault(person=>person.Id==p.Id)!=null;
+            return false;
+        }
         public Person Add(Person p)
         {
             Person ToAdd = mookData.Persons.FirstOrDefault(i => i.Equals(p));
@@ -124,7 +131,6 @@ namespace DB_Libary
             }
             return null;
         }
-
         public Person SignIn(Person p, string password)
         {
             if (p.CheckPassword(password))
@@ -161,12 +167,6 @@ namespace DB_Libary
             else
                 throw new Exception("ID is allready signed");
             return null;
-        }
-        public bool Contain(Person p)
-        {
-            if (p != null)
-                return mookData.Persons.FirstOrDefault(person=>person.Id==p.Id)!=null;
-            return false;
         }
     }
 }

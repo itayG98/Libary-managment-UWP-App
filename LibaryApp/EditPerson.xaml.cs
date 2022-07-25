@@ -55,13 +55,13 @@ namespace LibaryApp
         private void Submit_Click(object sender, RoutedEventArgs e)
         //validate the data if so update
         {
-            if (logic.NameValidity(FirstName.Text))
+            if (logic.CharectersOnly(FirstName.Text))
                 logic.PersonToEdit.FirstName = FirstName.Text;
-            if (logic.NameValidity(LastName.Text))
+            if (logic.CharectersOnly(LastName.Text))
                 logic.PersonToEdit.LastName = LastName.Text;
-            if (logic.NameValidity(City.Text))
+            if (logic.CharectersOnly(City.Text))
                 logic.PersonToEdit.City = City.Text;
-            if (logic.NameValidity(Street.Text))
+            if (logic.CharectersOnly(Street.Text))
                 logic.PersonToEdit.Street = Street.Text;
             if (HouseNumber.Text.All(ch => char.IsDigit(ch)) && HouseNumber.Text.Length < 5)
             {
@@ -83,7 +83,7 @@ namespace LibaryApp
         {
             try
             {
-                ShowAlert(logic.DeletePerson());
+                ShowAlert(logic.DeletePersonToEdit());
                 Frame.Navigate(typeof(EmployePage), logic);
             }
             catch (Exception ex)
