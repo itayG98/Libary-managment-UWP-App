@@ -38,7 +38,9 @@ namespace LibaryApp
             ChangePassword.Click += ChangePassword_Click;
             Libary.Click += Libary_Click;
             Submit.Click += Submit_Click;
+            Delete.Click += Delete_Person_Click;
         }
+
         //AppBarButton functions
         private void Libary_Click(object sender, RoutedEventArgs e)
         {
@@ -60,7 +62,7 @@ namespace LibaryApp
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
-            //validate the data if so update
+        //validate the data if so update
         {
             if (logic.NameValidity(FirstName.Text))
                 logic.PersonToEdit.FirstName = FirstName.Text;
@@ -83,6 +85,28 @@ namespace LibaryApp
             }
             LoadData();
         }
+
+        private void Delete_Person_Click(object sender, RoutedEventArgs e)
+            //Try delete current person
+            //Cant delete signed user
+        {
+            if (logic.PersonToEdit.Equals(logic.Signed))
+                return;
+            else
+            {
+                try
+                {
+                    logic.DeletePerson();
+                    Frame.Navigate(typeof(EmployePage), logic);
+                }
+                catch (Exception ex) 
+                {
+                    ShowAlert(ex.Message);
+                    Frame.Navigate(typeof(EmployePage), logic);
+                }
+            }
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
@@ -109,9 +133,9 @@ namespace LibaryApp
                 Discaount.IsEnabled = false;
         }
         public void LoadData()
-            //loade current data of personToEdit
+        //loade current data of personToEdit
         {
-            Congrat.Text = logic.GetName;
+            Congrat.Text = logic.PersonToEdit.FirstName+" "+ logic.PersonToEdit.LastName;
             FirstName.Text = logic.PersonToEdit.FirstName;
             LastName.Text = logic.PersonToEdit.LastName;
             City.Text = logic.PersonToEdit.City;

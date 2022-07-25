@@ -41,6 +41,14 @@ namespace DB_Libary
             else
                 throw new Exception("Couldnt succseed deleting item");
         }
+        public string DeletePerson() 
+        {
+            if (PersonToEdit.Equals(Signed))
+                return "Could not delete sigend user";
+            string msg = "Deleted"+Repo.Delete(PersonToEdit).ToString();
+            ClearPerson();
+            return msg;
+        }
         public void UpdateLogicLists()
         {
             persons = Repo.GetsSortedBy(new IComparerFirstName()).ToList();
