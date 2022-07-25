@@ -95,8 +95,8 @@ namespace LIbaryAppTesting
         public void CostumerSignUp()
         {
             LibaryRepository Repo = new LibaryRepository();
-            Assert.IsNotNull(Repo.CostumerSignUp("999984131", "Fname1", "Lname", "Rehovot", "none", 12, "123456"));
-            Assert.ThrowsException<Exception>(() => (Repo.CostumerSignUp("999984131", "Fname1", "Lname", "Rehovot", "none", 12, "123456")));
+            Assert.IsNotNull(Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456"));
+            Assert.ThrowsException<Exception>(() => (Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456")));
         }
         [TestMethod]
         public void EmployeeSignUp()
