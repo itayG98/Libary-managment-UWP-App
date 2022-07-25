@@ -101,7 +101,7 @@ namespace LibaryApp
             LeftDeitails.Children.Add(Freq);
             //Right Side
             Editors = new TextBox() { Header = "Editoers" };
-            PrintDate = new DatePicker() { MaxYear = DateTime.Now ,Header="Print Date" };
+            PrintDate = new DatePicker() { MaxYear = DateTime.Now, Header = "Print Date" };
             Grid.SetRow(Editors, 0);
             Grid.SetRow(PrintDate, 2);
             RightDeitails.Children.Add(Editors);
@@ -120,7 +120,7 @@ namespace LibaryApp
             Publishers = new ComboBox { Header = "Publishers Code", ItemsSource = ISBN.PublishersDict.Values };
             Country = new ComboBox() { Header = "Country Code", ItemsSource = ISBN.CountriesDict.Values };
             SerialNum = new TextBox() { Header = "Serial num Code" };
-            PrintDate = new DatePicker() { MaxYear = DateTime.Now ,Header = "Print Date" };
+            PrintDate = new DatePicker() { MaxYear = DateTime.Now, Header = "Print Date" };
             Grid.SetRow(ItemsName, 0);
             Grid.SetRow(Publishers, 1);
             Grid.SetRow(Country, 2);
@@ -128,13 +128,16 @@ namespace LibaryApp
             Grid.SetRow(PrintDate, 4);
             LeftDeitails.Children.Add(ItemsName);
             LeftDeitails.Children.Add(Publishers);
+            Publishers.SelectedIndex = 0;
             LeftDeitails.Children.Add(Country);
+            Country.SelectedIndex = 0;
             LeftDeitails.Children.Add(SerialNum);
             LeftDeitails.Children.Add(PrintDate);
 
             //Right Side
             Aouthors = new TextBox { Header = "Aouthors" };
             Description = new TextBox { Header = "Descreption" };
+            Description.MinHeight = 150;
             Price = new TextBox() { Header = "Price" };
             DiscountPercentage = new TextBox() { Header = "Discount Percentage" };
             Grid.SetRow(Price, 0);
@@ -154,6 +157,7 @@ namespace LibaryApp
             {
                 if (TryAddBook())
                 {
+                    logic.UpdateLogicLists();
                     ShowAlert($"succesfully added Journal {ItemsName.Text}");
                     Frame.Navigate(typeof(AddItem), logic);
                 }
@@ -162,6 +166,7 @@ namespace LibaryApp
             {
                 if (TryAddJournal())
                 {
+                    logic.UpdateLogicLists();
                     ShowAlert($"succesfully added Book {ItemsName.Text}");
                     Frame.Navigate(typeof(AddItem), logic);
                 }
@@ -203,12 +208,14 @@ namespace LibaryApp
                 return false;
             if (!double.TryParse(DiscountPercentage.Text, out double discount))
                 return false;
-
-            if (logic.AddBook(PublisherCode, SerialCode, ItemsName.Text, PrintDate.Date.Date, Aouthors.Text, Description.Text, price, discount, CountryCode) != null)
+            LibaryItem temp = logic.AddBook(PublisherCode, SerialCode, ItemsName.Text, PrintDate.Date.Date, Aouthors.Text, Description.Text, price, discount, CountryCode);
+            if (temp != null)
+            {
+                temp.Description = Description.Text;
                 return true;
+            }
             else
                 return false;
-
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

@@ -202,8 +202,6 @@ namespace DB_Libary
                 new Costumer("555555556","Fname12 ","Lname","Rehovot","none",5),
                 new Costumer("212121214","Fname13 ","Lname","Rehovot","none",5),
                 new Costumer("666666664","Fname14 ","Lname","Rehovot","none",5),
-                new StudentCostumer("347166134","Student1 ","Student","Rehovot","none",1),
-                new StudentCostumer("347166118","Student2 ","Student","Rehovot","none",1)
             };
         }
     }

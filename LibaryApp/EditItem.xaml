@@ -33,14 +33,17 @@
                 </Grid.ColumnDefinitions>
                 <Grid   Grid.Column="1" x:Name="RightDeitails" Padding="50" Margin="25" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
 
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" x:Name="PriceF" Header="Price" FontWeight="ExtraBold"   Margin="3" Padding="3" />
                     <TextBox Grid.Row="1" x:Name="DiscountF" Header="Discount"  FontWeight="ExtraBold"   Margin="3" Padding="3"  />
                     <TextBox Grid.Row="2" x:Name="StutusF" Text="Is Avilabile" Header="Avilabilty"  FontWeight="ExtraBold"  Margin="3" Padding="3"  />
+                    <TextBox Grid.Row="3" x:Name="DescriptionF" Header="Describtion"  FontWeight="ExtraBold" Margin="3" Padding="3"  />
+
                 </Grid>
                 <Grid  Grid.Column="0" x:Name="LeftDeitails"  Padding="50" Margin="25" >
                     <Grid.RowDefinitions>

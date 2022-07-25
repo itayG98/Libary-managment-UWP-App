@@ -25,7 +25,7 @@ namespace LibaryApp
             Libary.Click += Libary_Click;
             Submit.Click += Submit_Click;
             Delete.Click += Delete_Click;
-            Delete.IsTabStop=false;
+            Delete.IsTabStop = false;
         }
 
         //AppBarButton functions
@@ -59,6 +59,8 @@ namespace LibaryApp
             CodeF.Text = $"{logic.CurrentItem.ItemId}";
             PriceF.Text = $"{logic.CurrentItem.Price}";
             NameF.Text = logic.CurrentItem.Name;
+            DescriptionF.Text = logic.CurrentItem.Description;
+            DescriptionF.TextWrapping = TextWrapping.Wrap;
         }
         private void DisableFields()
         //disabled important field's 
@@ -101,6 +103,7 @@ namespace LibaryApp
             if (int.TryParse(DiscountF.Text, out Ivalue))
                 temp.DiscountPercentage = Ivalue;
             temp.PrintedDate = PrintedInF.Date.Date;
+            temp.Description = DescriptionF.Text;
             UpdateData();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
