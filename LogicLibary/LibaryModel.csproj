@@ -123,7 +123,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="BorrowList.cs" />
     <Compile Include="Costumer.cs" />
-    <Compile Include="Employye.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="ISNB.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="LibaryItem.cs" />

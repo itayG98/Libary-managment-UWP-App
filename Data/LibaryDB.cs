@@ -184,8 +184,8 @@ namespace DB_Libary
             //Persons Data
             Persons = new List<Person>
             {
-                Employye.EmloyeSigning("12345","999268121","Itay","Getahun","Rehovot","none"),
-                Employye.EmloyeSigning("12345","999240872","Kendrick","Lamar","Compotn","none"),
+                Employee.EmloyeSigning("12345","999268121","Itay","Getahun","Rehovot","none"),
+                Employee.EmloyeSigning("12345","999240872","Kendrick","Lamar","Compotn","none"),
                 new Costumer("999984131","Exmpl","Exmpl","Rehovot","none",12),
                 new Costumer("999691249","Fname2","Lname","Rehovot","none",11),
                 new Costumer("345678320","Fname1 ","Lname","Rehovot","none",10),

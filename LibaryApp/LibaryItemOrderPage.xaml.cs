@@ -36,7 +36,7 @@ namespace LibaryApp
         //AppBarButton funcions
         private void ChangeDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (logic.Signed as Employye != null && logic.libaryItems.Contains(logic.CurrentItem))
+            if (logic.Signed as Employee != null && logic.libaryItems.Contains(logic.CurrentItem))
                 Frame.Navigate(typeof(EditItem), logic);
             else
             {

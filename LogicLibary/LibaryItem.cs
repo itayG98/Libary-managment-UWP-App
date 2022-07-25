@@ -23,23 +23,12 @@ namespace LibaryModel
         /// Uniqe GUID id
         /// </summary>
         public Guid ItemId => _itemId;
-
-        /// <summary>
-        /// Printing date of the Libary item
-        /// </summary>
         public DateTime PrintedDate { get => _printedDate; set => _printedDate = value; }
-        /// <summary>
-        /// Price of  Libary item
-        /// </summary>
         public double Price { get => _price; set => _price = value; }
         /// <summary>
         /// Current discount of book may be differ if a special costumer buy
         /// </summary>
         public double DiscountPercentage { get => _discountRate; set => _discountRate = value; }
-
-        /// <summary>
-        /// Descreption of the Libary item
-        /// </summary>
         public string Description { get => _description; set => _description = value; }
         /// <summary>
         /// Currrent status of the Libary item

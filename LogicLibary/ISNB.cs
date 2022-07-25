@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace LibaryModel
 {
+    /// <summary>
+    /// An ISNB is an unique global serial number acording to version country and publisher
+    /// </summary>
     public class ISBN
     {
         private const int PREFIX_NUM = 978;

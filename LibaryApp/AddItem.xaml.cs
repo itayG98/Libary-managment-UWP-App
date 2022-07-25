@@ -225,7 +225,7 @@ namespace LibaryApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
-            if (logic == null || logic.Signed as Employye == null)
+            if (logic == null || logic.Signed as Employee == null)
             {
                 logic.SignOut();
                 Frame.Navigate(typeof(MainPage), logic);

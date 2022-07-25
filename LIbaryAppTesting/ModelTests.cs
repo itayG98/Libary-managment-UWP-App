@@ -103,11 +103,11 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void ChangePassword()
         {
-            Person p1 = Employye.EmloyeSigning("12345", "999268121", "Itay", "Getahun", "Rehovot", "none");
+            Person p1 = Employee.EmloyeSigning("12345", "999268121", "Itay", "Getahun", "Rehovot", "none");
             Assert.IsTrue(p1.ChangePassword("1234ABCD", "1234567"));
             Assert.IsTrue(p1.CheckPassword("1234567"));
 
-            p1 = Employye.EmloyeSigning("12345", "999268121", "Itay", "Getahun", "Rehovot", "none", 12, "123456");
+            p1 = Employee.EmloyeSigning("12345", "999268121", "Itay", "Getahun", "Rehovot", "none", 12, "123456");
             Assert.IsTrue(p1.ChangePassword("123456", "123456789"));
             Assert.IsTrue(p1.CheckPassword("123456789"));
         }
@@ -116,7 +116,7 @@ namespace LIbaryAppTesting
         public void Borrow()
         {
             Costumer p1 = new Costumer("999268121", "Itay", "Getahun", "Rehovot", "none", 12, "123456");
-            Employye p2 = Employye.EmloyeSigning("12345","347166134", "Itay", "Getahun", "Rehovot", "none", 12);
+            Employee p2 = Employee.EmloyeSigning("12345","347166134", "Itay", "Getahun", "Rehovot", "none", 12);
             Journal J1 = new Journal("Laisha", DateTime.Today, Frequancy.Daily, "John D", 24);
             Journal J2 = new Journal("Laisha", DateTime.Today, Frequancy.Monthly, "John D", 15);
             Book b1 = new Book(1, 69, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", 100, 965);
@@ -139,7 +139,7 @@ namespace LIbaryAppTesting
         public void Return()
         {
             Costumer p1 = new Costumer("999268121", "Itay", "Getahun", "Rehovot", "none", 12, "123456");
-            Employye p2 = Employye.EmloyeSigning("12345", "347166134", "Itay", "Getahun", "Rehovot", "none", 12);
+            Employee p2 = Employee.EmloyeSigning("12345", "347166134", "Itay", "Getahun", "Rehovot", "none", 12);
             Journal j1 = new Journal("Laisha", DateTime.Today, Frequancy.Daily, "John D", 24);
             Journal j2 = new Journal("Laisha", DateTime.Today, Frequancy.Monthly, "John D", 15);
             Book b1 = new Book(1, 69, "Maps of meaning", new DateTime(1900, 10, 10), "Robert S", 100, 965);
@@ -162,7 +162,7 @@ namespace LIbaryAppTesting
         public void EqualsPerson() 
         {
             Costumer p1 = new Costumer("999268121", "Itay", "Getahun", "Rehovot", "none", 12, "123456");
-            Employye p2 = Employye.EmloyeSigning("12345", "347166134", "Itay", "Getahun", "Rehovot", "none", 12);
+            Employee p2 = Employee.EmloyeSigning("12345", "347166134", "Itay", "Getahun", "Rehovot", "none", 12);
             Person p = p1;
 
             Assert.AreEqual(false, p1.Equals(p2));
@@ -172,8 +172,8 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void SignEmployye()  
         {
-            Assert.IsNull(Employye.EmloyeSigning("123456", "347166134", "Itay", "Getahun", "Rehovot", "none", 12));
-            Assert.IsNull(Employye.EmloyeSigning("123456", "347166134", "Itay", "Getahun", "Rehovot", "none", 12));
+            Assert.IsNull(Employee.EmloyeSigning("123456", "347166134", "Itay", "Getahun", "Rehovot", "none", 12));
+            Assert.IsNull(Employee.EmloyeSigning("123456", "347166134", "Itay", "Getahun", "Rehovot", "none", 12));
         }
 
         //BorrowList

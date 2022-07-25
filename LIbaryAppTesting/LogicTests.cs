@@ -200,7 +200,7 @@ namespace LIbaryAppTesting
             Assert.IsNotNull(logic.EmployeSignUp("342432119", "Fname1", "Lname", "Rehovot", "none", "12345", 13));
 
             Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432424" && p is Costumer));
-            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432119" && p is Employye));
+            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432119" && p is Employee));
         }
 
         [TestMethod]

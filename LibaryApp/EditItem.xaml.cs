@@ -73,7 +73,7 @@ namespace LibaryApp
             }
             else
             {
-                if (logic.Signed as Employye != null)
+                if (logic.Signed as Employee != null)
                     Frame.Navigate(typeof(EmployePage), logic);
                 else
                     Frame.Navigate(typeof(CostumerPage), logic);
@@ -109,7 +109,7 @@ namespace LibaryApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
-            if (logic != null && logic.Signed as Employye != null)
+            if (logic != null && logic.Signed as Employee != null)
             {
                 DisableFields();
                 UpdateData();

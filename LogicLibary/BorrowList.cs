@@ -80,6 +80,7 @@ namespace LibaryModel
         /// </summary>
         /// <param name="otherId"></param>
         /// <returns></returns>
+       
         public int IndexOf(Guid otherId)
         {
             for (int i = 0; i < Borrows.Length; i++)
@@ -102,7 +103,11 @@ namespace LibaryModel
         }
     }
 
+    /// <summary>
+    /// Struct of details contain items ID name and dates
+    /// </summary>
     public struct BorrowDetail
+    
     {
         public Guid itemId { get; set; }
 

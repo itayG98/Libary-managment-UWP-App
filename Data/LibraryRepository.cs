@@ -157,7 +157,7 @@ namespace DB_Libary
         {
             if (mookData.Persons.Find(p => p.Id == id) == null)
             {
-                Person p = Employye.EmloyeSigning(ManagerPassword, id, fname, lname, city, street, houseNumber, password);
+                Person p = Employee.EmloyeSigning(ManagerPassword, id, fname, lname, city, street, houseNumber, password);
                 if (p != null)
                 {
                     mookData.Persons.Add(p);

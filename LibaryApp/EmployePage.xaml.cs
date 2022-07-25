@@ -50,7 +50,7 @@ namespace LibaryApp
         //AppBarButton
         private void Addbook_Click(object sender, RoutedEventArgs e)
         {
-            if (logic.Signed as Employye != null)
+            if (logic.Signed as Employee != null)
                 Frame.Navigate(typeof(AddItem), logic);
         }
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
@@ -99,7 +99,7 @@ namespace LibaryApp
             if (CostumerOrEmployees.SelectedItem == OnlyCostumers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Costumer);
             else if (CostumerOrEmployees.SelectedItem == OnlyEmployees)
-                ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Employye);
+                ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Employee);
             else if (CostumerOrEmployees.SelectedItem == ShowBorrowers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p.BorrowingCount > 0);
             else
@@ -126,7 +126,7 @@ namespace LibaryApp
             if (CostumerOrEmployees.SelectedItem == OnlyCostumers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Costumer);
             else if (CostumerOrEmployees.SelectedItem == OnlyEmployees)
-                ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Employye);
+                ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p is Employee);
             else if (CostumerOrEmployees.SelectedItem == ShowBorrowers)
                 ItemsListVeiw.ItemsSource = logic.persons.FindAll(p => p.BorrowingCount > 0);
             else

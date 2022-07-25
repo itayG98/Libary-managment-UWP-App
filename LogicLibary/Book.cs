@@ -51,6 +51,7 @@ namespace LibaryModel
         public int Publisher { get => _publisher; set => _publisher = value; }
 
         public override bool Equals(object obj)
+            //Two book equal if both have same ISBN
         {
             if (obj is Book other && other!=null)
                 return _isbn.Equals(other._isbn);

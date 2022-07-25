@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace LibaryModel
 {
+    /// <summary>
+    /// A class represent a user in the libary system
+    /// </summary>
     public abstract class Person
     {
         public const int MAX_BORROWING = 5;
@@ -47,6 +50,7 @@ namespace LibaryModel
             BorrowingList = new BorrowDetailList(MAX_BORROWING);
         }
         public static bool Validation(string id)
+            //Validate israeli ID
         {
             int sum = 0, temp;
             if (id.Length != 9)
@@ -114,6 +118,7 @@ namespace LibaryModel
             }
             return returned;
         }
+
         public override string ToString()
         {
             return $"{FirstName} {LastName} {City} {Street} {HouseNumber}";
