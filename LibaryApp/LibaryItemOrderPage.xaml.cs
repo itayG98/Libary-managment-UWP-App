@@ -104,6 +104,7 @@ namespace LibaryApp
             if (logic != null)
             {
                 description.Text = logic.CurrentItem.Description;
+                description.TextWrapping = TextWrapping.Wrap;
                 Congrat.Text = $"Hello {logic.GetName}";
                 Name.Text = logic.CurrentItem.Name;
                 Price.Text = $"{logic.CurrentItem.Price:C}";

@@ -102,10 +102,14 @@ namespace LibaryApp
             //Right Side
             Editors = new TextBox() { Header = "Editoers" };
             PrintDate = new DatePicker() { MaxYear = DateTime.Now, Header = "Print Date" };
+            Description = new TextBox() { Header="Description", TextWrapping = TextWrapping.Wrap };
             Grid.SetRow(Editors, 0);
-            Grid.SetRow(PrintDate, 2);
+            Grid.SetRow(PrintDate, 1);
+            Grid.SetRow(Description, 2);
             RightDeitails.Children.Add(Editors);
             RightDeitails.Children.Add(PrintDate);
+            RightDeitails.Children.Add(Description);
+            RightDeitails.RowDefinitions[2].MinHeight = 150;
         }
         private void GenerateBookFields()
         {
@@ -128,16 +132,16 @@ namespace LibaryApp
             Grid.SetRow(PrintDate, 4);
             LeftDeitails.Children.Add(ItemsName);
             LeftDeitails.Children.Add(Publishers);
-            Publishers.SelectedIndex = 0;
             LeftDeitails.Children.Add(Country);
-            Country.SelectedIndex = 0;
             LeftDeitails.Children.Add(SerialNum);
             LeftDeitails.Children.Add(PrintDate);
+            //Diffult values
+            Publishers.SelectedIndex = 0;
+            Country.SelectedIndex = 0;
 
             //Right Side
             Aouthors = new TextBox { Header = "Aouthors" };
-            Description = new TextBox { Header = "Descreption" };
-            Description.MinHeight = 150;
+            Description = new TextBox { Header = "Descreption",TextWrapping=TextWrapping.Wrap };
             Price = new TextBox() { Header = "Price" };
             DiscountPercentage = new TextBox() { Header = "Discount Percentage" };
             Grid.SetRow(Price, 0);
@@ -148,6 +152,7 @@ namespace LibaryApp
             RightDeitails.Children.Add(Description);
             RightDeitails.Children.Add(Price);
             RightDeitails.Children.Add(DiscountPercentage);
+            RightDeitails.RowDefinitions[3].MinHeight = 150;
         }
 
         //Sumbit and validate
