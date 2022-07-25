@@ -47,6 +47,7 @@ namespace DB_Libary
                 return "Could not delete sigend user";
             string msg = "Deleted"+Repo.Delete(PersonToEdit).ToString();
             ClearPerson();
+            UpdateLogicLists();
             return msg;
         }
         public void UpdateLogicLists()

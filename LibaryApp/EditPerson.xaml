@@ -64,7 +64,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Submit" Grid.Column="0" Content="Submit" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="25" />
-                    <Button x:Name="Delete" Grid.Column="1" Content="Delete" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25" />
+                    <Button x:Name="Delete" Grid.Column="1" Content="Delete" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25" Background="Red" />
 
                 </Grid>
             </Grid>

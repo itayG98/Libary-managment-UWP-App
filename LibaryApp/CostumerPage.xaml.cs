@@ -113,8 +113,6 @@ namespace LibaryApp
             else
                 UpdateMenu();
         }
-
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             logic = e.Parameter as Logic;
@@ -122,6 +120,7 @@ namespace LibaryApp
             {
                 logic.UpdateLogicLists();
                 UpdateMenu();
+                logic.ClearItem();
             }
             else
             {

@@ -1,19 +1,10 @@
 ﻿using DB_Libary;
 using LibaryModel;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -87,25 +78,22 @@ namespace LibaryApp
         }
 
         private void Delete_Person_Click(object sender, RoutedEventArgs e)
-            //Try delete current person
-            //Cant delete signed user
+        //Try delete current person
+        //Cant delete signed user
         {
-            if (logic.PersonToEdit.Equals(logic.Signed))
-                return;
-            else
+            try
             {
-                try
-                {
-                    logic.DeletePerson();
-                    Frame.Navigate(typeof(EmployePage), logic);
-                }
-                catch (Exception ex) 
-                {
-                    ShowAlert(ex.Message);
-                    Frame.Navigate(typeof(EmployePage), logic);
-                }
+                ShowAlert(logic.DeletePerson());
+                Frame.Navigate(typeof(EmployePage), logic);
+            }
+            catch (Exception ex)
+            {
+                ShowAlert(ex.Message);
+                logic.ClearPerson();
+                Frame.Navigate(typeof(EmployePage), logic);
             }
         }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -129,13 +117,17 @@ namespace LibaryApp
         {
             ID.IsEnabled = false;
             if (logic.Signed as Costumer != null)
+            {
                 //Disabled if it is a Costumer
                 Discaount.IsEnabled = false;
+                Delete.IsEnabled = false;
+                Delete.Visibility = Visibility.Collapsed;
+            }
         }
         public void LoadData()
         //loade current data of personToEdit
         {
-            Congrat.Text = logic.PersonToEdit.FirstName+" "+ logic.PersonToEdit.LastName;
+            Congrat.Text = logic.PersonToEdit.FirstName + " " + logic.PersonToEdit.LastName;
             FirstName.Text = logic.PersonToEdit.FirstName;
             LastName.Text = logic.PersonToEdit.LastName;
             City.Text = logic.PersonToEdit.City;

@@ -159,6 +159,17 @@ namespace LIbaryAppTesting
             msg.Contains(jo.ToString());
             Assert.IsTrue(logic.libaryItems.Contains(jo));
         }
+
+        [TestMethod]
+        public void DeletePerson() 
+        {
+            Logic logic = new Logic();
+            Person Cos = logic.CostumerSignUp("222111114", "Fname1 ", "Lname", "Rehovot", "none", 10);
+            Person Emp =logic.EmployeSignUp("222222226", "Fname1 ", "Lname", "Rehovot", "none", "12345", 10);
+            logic.PersonToEdit = Cos;
+            Assert.IsTrue(logic.DeletePerson() is string);
+            Assert.IsNull(logic.persons.Find((p) => p.Id == "222111114"));
+        }
         [TestMethod]
         public void PersonToEditAndClear()
         {

@@ -209,6 +209,8 @@ namespace LibaryApp
             {
                 logic.UpdateLogicLists();
                 UpdateMenu();
+                logic.ClearItem();
+                logic.ClearPerson();
                 Congrat.Text = logic.GetName;
             }
             else

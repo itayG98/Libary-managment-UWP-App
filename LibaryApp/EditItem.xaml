@@ -60,8 +60,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Submit" Grid.Column="0" Content="Submit"    Margin="50" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"  />
-                <Button x:Name="Delete" Grid.Column="1" Content="Delete item" Width="200" Margin="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                <Button x:Name="Submit" Grid.Column="0" Content="Submit"    Margin="50" Width="200" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                <Button x:Name="Delete" Grid.Column="1" Content="Delete item" Width="200" Margin="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Red" />
             </Grid>
         </Grid>
     </Grid>
