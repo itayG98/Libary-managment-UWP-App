@@ -1,4 +1,4 @@
-##Overview
+# Overview
 
 
 My application has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class and Logic class.
@@ -33,7 +33,7 @@ Features:
 
 
 
-#Optional additions which were not included in current version**
+# Optional additions which were not included in current version**
 *Duo to time shortage
 
 
@@ -49,9 +49,11 @@ Features:
 
 •	Add a data track of all transaction which made.
 
+•	Add reviews feature on the libary items.
 
 
-#Summery
+
+# Summery
 I developed 4 projects for my application :
 
 
@@ -78,6 +80,7 @@ I made test methods to the class libraries projects and due to confusion, I made
 **Key fixes from zoom talk:**
 
 I may split the library repository class into 2 classes for Person’s repository and Library item’s repository
+
 
 
 ![OrderItemPage](https://user-images.githubusercontent.com/91791115/180969287-230fbbc1-6fde-43d2-a907-6f383528ec61.png)
