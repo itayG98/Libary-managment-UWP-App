@@ -2,9 +2,10 @@
 
 ![MainPage](https://user-images.githubusercontent.com/91791115/180998374-829277c7-a4c4-4b2c-ae52-044b099c9832.png)
 
-My app main purpose is to manage a libary costumers and items add let users order buy and return from the library's stock
-My application has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class and Logic class.
-Features:
+My app main purpose is to manage a libary costumers and items add let users order buy and return from the library's stock.
+It has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class Logic class and the model claas.
+
+**Main Features:
 
 1.	Signing up Costumer / Employee
 
@@ -18,7 +19,7 @@ Features:
 
 6.	Change user’s details
 
-*Employee’s extra features:*
+**Employee’s extra features:
 
 7.	Add library items to the system
 
@@ -33,13 +34,11 @@ Features:
 
 
 
-
-
 # Optional additions which were not included in current version**
 *Duo to time shortage
 
 
-Features:
+**Features:
 
 •	Billing system and implementation of discount
 
@@ -79,7 +78,7 @@ This project familiar with both Model and Logic.
 I made test methods to the class libraries projects and due to confusion, I made some methods as integration test (Testing how the Logic class and the Irepository integrate with the mook data class)
 
 
-**Key fixes from zoom talk:**
+**Key fixes from zoom talk:
 
 I may split the library repository class into 2 classes for Person’s repository and Library item’s repository
 
