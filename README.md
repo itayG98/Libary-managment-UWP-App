@@ -35,7 +35,8 @@ Features:
 
 
 **Summery**
-I developed 4 projects for my application
+I developed 4 projects for my application :
+
 
 •	Library model
 class library for the objects needed in the library and their behavior.
