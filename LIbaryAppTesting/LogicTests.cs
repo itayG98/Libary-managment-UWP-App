@@ -77,10 +77,10 @@ namespace LIbaryAppTesting
             Repo.Add(libaryItem);
 
             Guid libId = libaryItem.ItemId;
-            Assert.IsTrue(Repo.GetById(libId) == libaryItem);
+            Assert.AreEqual(Repo.GetById(libId),libaryItem);
 
             string pesronsId = person.Id;
-            Assert.IsTrue(Repo.GetById(pesronsId) == person);
+            Assert.AreEqual(Repo.GetById(pesronsId),person);
         }
 
         [TestMethod]
