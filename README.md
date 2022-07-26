@@ -1,4 +1,6 @@
-Overview
+**Overview**
+
+
 My application has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class and Logic class.
 Features:
 •	Signing up Costumer / Employee
@@ -14,7 +16,9 @@ Employee’s extra features:
 •	Delete from the system User except itself
 •	Delete Book from the system
 
-Optional additions which were not included in current version
+**Optional additions which were not included in current version**
+
+
 *Duo to time shortage
 
 Features:
@@ -26,7 +30,7 @@ Features:
 
 
 
-Summery
+**Summery**
 I developed 4 projects for my application
 •	Library model
 class library for the objects needed in the library and their behavior.
@@ -40,6 +44,6 @@ This project familiar with both Model and Logic.
 •	Library app Tests
 I made test methods to the class libraries projects and due to confusion, I made some methods as integration test (Testing how the Logic class and the Irepository integrate with the mook data class)
 
-Key fixes from zoom talk:
+**Key fixes from zoom talk:**
 
 I may split the library repository class into 2 classes for Person’s repository and Library item’s repository
