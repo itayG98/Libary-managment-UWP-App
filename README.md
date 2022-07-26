@@ -3,17 +3,29 @@
 
 My application has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class and Logic class.
 Features:
+
 •	Signing up Costumer / Employee
+
 •	Logging in into appropriate page
+
 •	Choose library item to see its Fields
+
 •	Borrow / Buy /Return specific item
+
 •	Change Password
+
 •	Change user’s details
-Employee’s extra features:
+
+*Employee’s extra features:*
+
 •	Add library items to the system
+
 •	Change person’s discount or details
+
 •	View all Borrowers / costumer /Employees / all Users
+
 •	Delete from the system User except itself
+
 •	Delete Book from the system
 
 **Optional additions which were not included in current version**
