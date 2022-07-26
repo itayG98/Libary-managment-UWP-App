@@ -198,7 +198,7 @@ namespace LIbaryAppTesting
             Logic logic = new Logic();
             Assert.IsNotNull(logic.CostumerSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", 13));
             Assert.IsNotNull(logic.EmployeSignUp("342432119", "Fname1", "Lname", "Rehovot", "none", "12345", 13));
-
+            logic.UpdateLogicLists();
             Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432424" && p is Costumer));
             Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432119" && p is Employee));
         }
