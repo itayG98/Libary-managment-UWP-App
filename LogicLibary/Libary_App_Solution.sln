@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryModel", "LibaryModel.csproj", "{FBD4F14C-8276-4C05-9440-E952C22790D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryAppModel", "LibaryAppModel.csproj", "{FBD4F14C-8276-4C05-9440-E952C22790D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic_MookData", "..\Data\Logic_MookData.csproj", "{83A5586B-4C5B-44F6-B8E4-658ABD00E4CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryApp", "..\LibaryApp\LibaryApp.csproj", "{D3F6EEF2-DA7F-4620-94CD-8F82109AA2F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryAppView", "..\LibaryApp\LibaryAppView.csproj", "{D3F6EEF2-DA7F-4620-94CD-8F82109AA2F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIbaryAppTesting", "..\LIbaryAppTesting\LIbaryAppTesting.csproj", "{4797E0AA-2C85-47EE-B24B-9A5E5C8048C1}"
 EndProject

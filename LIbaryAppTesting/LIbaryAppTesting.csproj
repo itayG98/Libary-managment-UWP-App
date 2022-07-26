@@ -163,9 +163,9 @@
       <Project>{83a5586b-4c5b-44f6-b8e4-658abd00e4ca}</Project>
       <Name>Logic_MookData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogicLibary\LibaryModel.csproj">
+    <ProjectReference Include="..\LogicLibary\LibaryAppModel.csproj">
       <Project>{fbd4f14c-8276-4c05-9440-e952c22790d0}</Project>
-      <Name>LibaryModel</Name>
+      <Name>LibaryAppModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
