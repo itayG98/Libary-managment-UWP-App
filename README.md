@@ -5,7 +5,7 @@
 My app main purpose is to manage a libary costumers and items add let users order buy and return from the library's stock.
 It has 2 types of users first Costumer and second is Employee and can handle its tasks using MookData class Logic class and the model claas.
 
-**Main Features:
+**Main Features:**
 
 1.	Signing up Costumer / Employee
 
@@ -19,7 +19,7 @@ It has 2 types of users first Costumer and second is Employee and can handle its
 
 6.	Change user’s details
 
-**Employee’s extra features:
+**Employee’s extra features:**
 
 7.	Add library items to the system
 
@@ -34,11 +34,11 @@ It has 2 types of users first Costumer and second is Employee and can handle its
 
 
 
-# Optional additions which were not included in current version**
+# Optional additions which were not included in current version
 *Duo to time shortage
 
 
-**Features:
+**Features:**
 
 •	Billing system and implementation of discount
 
@@ -58,27 +58,27 @@ It has 2 types of users first Costumer and second is Employee and can handle its
 I developed 4 projects for my application :
 
 
-1.	Library model
+1.Library model
 
 class library for the objects needed in the library and their behavior.
 This class library is dependent and does not work with any special references DLL’s.
 
-2.	Logic and mook Data
+2.Logic and mook Data
 
 class library for mook data and its Repository interface and logic object for managing the application .
 This class library work with the library model.
 
-3.	Library app
+3.Library app
 
 The UWP project having variety of UWP pages the user can navigate through
 This project familiar with both Model and Logic.
 
-4.	Library app Tests
+4.Library app Tests
 
 I made test methods to the class libraries projects and due to confusion, I made some methods as integration test (Testing how the Logic class and the Irepository integrate with the mook data class)
 
 
-**Key fixes from zoom talk:
+**Key fixes from zoom talk:**
 
 I may split the library repository class into 2 classes for Person’s repository and Library item’s repository
 
