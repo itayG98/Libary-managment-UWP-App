@@ -28,10 +28,14 @@ Features:
 
 •	Delete Book from the system
 
+
+
+
+
+
 **Optional additions which were not included in current version**
-
-
 *Duo to time shortage
+
 
 Features:
 •	Billing system and implementation of discount
@@ -51,19 +55,24 @@ I developed 4 projects for my application :
 
 
 •	Library model
+
 class library for the objects needed in the library and their behavior.
 This class library is dependent and does not work with any special references DLL’s.
 
 •	Logic and mook Data
+
 class library for mook data and its Repository interface and logic object for managing the application .
 This class library work with the library model.
 
 •	Library app
+
 The UWP project having variety of UWP pages the user can navigate through
 This project familiar with both Model and Logic.
 
 •	Library app Tests
+
 I made test methods to the class libraries projects and due to confusion, I made some methods as integration test (Testing how the Logic class and the Irepository integrate with the mook data class)
+
 
 **Key fixes from zoom talk:**
 
