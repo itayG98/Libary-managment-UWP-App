@@ -29,39 +29,42 @@ namespace LIbaryAppTesting
             LibaryItem libaryItem = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person person = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
 
-            Logic.Repo.Add(libaryItem);
-            Logic.Repo.Add(person);
+            Logic.LibsRepo.Add(libaryItem);
+            Logic.PersonsRepo.Add(person);
             Assert.IsNotNull(mookData.LibaryItems.Find(lib => lib.Equals(libaryItem)));
             Assert.IsNotNull(mookData.Persons.Find(p => p.Equals(person)));
 
-            Logic.Repo.Borrow(person, libaryItem);
-            Assert.ThrowsException<Exception>(() => Logic.Repo.Delete(libaryItem));
-            Assert.ThrowsException<Exception>(() => Logic.Repo.Delete(person));
+            Logic.LibsRepo.Borrow(person, libaryItem);
+            Assert.ThrowsException<Exception>(() => Logic.LibsRepo.Delete(libaryItem));
+            Assert.ThrowsException<Exception>(() => Logic.PersonsRepo.Delete(person));
 
-            Assert.IsNotNull(Logic.Repo.ReturnBook(person, libaryItem));
+            Assert.IsNotNull(Logic.LibsRepo.ReturnBook(person, libaryItem));
 
-            Assert.IsNotNull(Logic.Repo.Delete(person));
-            Assert.IsNotNull(Logic.Repo.Delete(libaryItem));
+            Assert.IsNotNull(Logic.PersonsRepo.Delete(person));
+            Assert.IsNotNull(Logic.LibsRepo.Delete(libaryItem));
         }
 
         [TestMethod]
         public void GetPersonOrLibaryApp()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
+            LibaryItemsRepository LibaryRepoRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
             LibaryItem lib = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person p = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
-            Logic.Repo.Add(lib);
-            Logic.Repo.Add(p);
+            Logic.LibsRepo.Add(lib);
+            Logic.PersonsRepo.Add(p);
 
-            Assert.AreEqual(Repo.Get(p), p);
-            Assert.AreEqual(Repo.Get(lib), lib);
+            Assert.AreEqual(personRepo.Get(p), p);
+            Assert.AreEqual(LibaryRepoRepo.Get(lib), lib);
         }
 
         [TestMethod]
         public void GetIquaryAble()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
-            List<LibaryItem> libs1 = Repo.Get().ToList();
+            LibaryItemsRepository libsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
+
+            List<LibaryItem> libs1 = libsRepo.Get().ToList();
             List<LibaryItem> libs2 = LibaryDB.DataInstance.LibaryItems;
             for (int i = 0; i < libs1.Count; i++)
                 Assert.AreEqual(libs1[i], libs2[i]);
@@ -69,64 +72,70 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void GetByID()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
+            LibaryItemsRepository LibsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
+
             LibaryItem libaryItem = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person person = new Costumer("342432424", "Fname1", "Lname", "Rehovot", "none");
 
-            Repo.Add(person);
-            Repo.Add(libaryItem);
+            personRepo.Add(person);
+            LibsRepo.Add(libaryItem);
 
             Guid libId = libaryItem.ItemId;
-            Assert.AreEqual(Repo.GetById(libId),libaryItem);
+            Assert.AreEqual(LibsRepo.GetById(libId),libaryItem);
 
             string pesronsId = person.Id;
-            Assert.AreEqual(Repo.GetById(pesronsId),person);
+            Assert.AreEqual(personRepo.GetById(pesronsId),person);
         }
 
         [TestMethod]
         public void SignIn()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
+            LibaryItemsRepository LibsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
             Person person = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none", 12, "123456");
-            Assert.IsNull(Repo.SignIn(person, "12345678"));
-            Assert.IsNotNull(Repo.SignIn(person, "123456"));
+            Assert.IsNull(personRepo.SignIn(person, "12345678"));
+            Assert.IsNotNull(personRepo.SignIn(person, "123456"));
         }
         [TestMethod]
         public void CostumerSignUp()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
-            Assert.IsNotNull(Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456"));
-            Assert.ThrowsException<Exception>(() => (Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456")));
+            LibaryItemsRepository LibsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
+            Assert.IsNotNull(personRepo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456"));
+            Assert.ThrowsException<Exception>(() => (personRepo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456")));
         }
         [TestMethod]
         public void EmployeeSignUp()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
-            Assert.IsNotNull(Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456"));
-            Assert.IsNotNull(Repo.GetById("342432424"));
-            Assert.ThrowsException<Exception>(() => (Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456")));
+            LibaryItemsRepository LibsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
+            Assert.IsNotNull(personRepo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456"));
+            Assert.IsNotNull(personRepo.GetById("342432424"));
+            Assert.ThrowsException<Exception>(() => (personRepo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456")));
         }
 
         [TestMethod]
         public void Contain()
         {
-            LibaryItemsRepository Repo = new LibaryItemsRepository();
+            LibaryItemsRepository LibsRepo = new LibaryItemsRepository();
+            PersonsRepository personRepo = new PersonsRepository();
             LibaryItem lib1 = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person p1 = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
             LibaryItem lib2 = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person p2 = new Costumer("999017130", "Fname1", "Lname", "Rehovot", "none");
-            Repo.Add(lib1);
-            Repo.Add(p1);
-            Assert.IsTrue(Repo.Contain(lib1));
-            Assert.IsTrue(Repo.Contain(p1));
-            Assert.IsFalse(Repo.Contain(lib2));
-            Assert.IsFalse(Repo.Contain(p2));
+            LibsRepo.Add(lib1);
+            personRepo.Add(p1);
+            Assert.IsTrue(LibsRepo.Contain(lib1));
+            Assert.IsTrue(personRepo.Contain(p1));
+            Assert.IsFalse(LibsRepo.Contain(lib2));
+            Assert.IsFalse(personRepo.Contain(p2));
 
-            Repo.Delete(lib1);
-            Repo.Delete(lib2);
+            LibsRepo.Delete(lib1);
+            LibsRepo.Delete(lib2);
 
-            Assert.IsTrue(Repo.Contain(lib1));
-            Assert.IsTrue(Repo.Contain(p1));
+            Assert.IsTrue(LibsRepo.Contain(lib1));
+            Assert.IsTrue(personRepo.Contain(p1));
         }
 
 
@@ -196,11 +205,11 @@ namespace LIbaryAppTesting
         public void SignUpPersons()
         {
             Logic logic = new Logic();
-            Assert.IsNotNull(logic.CostumerSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", 13));
-            Assert.IsNotNull(logic.EmployeSignUp("342432119", "Fname1", "Lname", "Rehovot", "none", "12345", 13));
+            Assert.IsNotNull(logic.CostumerSignUp("444443436", "Fname1", "Lname", "Rehovot", "none", 13));
+            Assert.IsNotNull(logic.EmployeSignUp("232323238", "Fname1", "Lname", "Rehovot", "none", "12345", 13));
             logic.UpdateLogicLists();
-            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432424" && p is Costumer));
-            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "342432119" && p is Employee));
+            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "444443436" && p is Costumer));
+            Assert.IsNotNull(logic.persons.Find((p) => p.Id == "232323238" && p is Employee));
         }
 
         [TestMethod]

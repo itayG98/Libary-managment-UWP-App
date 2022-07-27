@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel_MoockDB", "..\Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryAppView", "..\LibaryApp\LibaryAppView.csproj", "{D3F6EEF2-DA7F-4620-94CD-8F82109AA2F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIbaryAppTesting", "..\LIbaryAppTesting\LIbaryAppTesting.csproj", "{4797E0AA-2C85-47EE-B24B-9A5E5C8048C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTesting", "..\LIbaryAppTesting\UnitTesting.csproj", "{4797E0AA-2C85-47EE-B24B-9A5E5C8048C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
