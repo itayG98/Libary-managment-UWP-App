@@ -78,9 +78,9 @@ This project familiar with both Model and Logic.
 I made test methods to the class libraries projects and due to confusion, I made some methods as integration test (Testing how the Logic class and the Irepository integrate with the mook data class)
 
 
-**Key fixes from zoom talk:**
+**Key conclusion from zoom talk:**
 
-I may split the library repository class into 2 classes for Person’s repository and Library item’s repository
+I need to split the library repository class into 2 classes for Person’s repository and Library item’s repository
 
 
 
