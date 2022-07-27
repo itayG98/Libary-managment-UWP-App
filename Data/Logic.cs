@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibaryModel;
 
-namespace DB_Libary
+namespace ViewModel_MoockDB
 {
     /// <summary>
     /// The logic is the only obj the UI works with directly an
@@ -13,7 +13,8 @@ namespace DB_Libary
     /// </summary>
     public class Logic
     {
-        public static LibaryRepository Repo;
+        public static LibaryItemsRepository LibsRepo;
+        public static PersonsRepository PersonsRepo;
         public List<Person> persons;
         public List<LibaryItem> libaryItems;
         private LibaryItem _currentItem;
@@ -26,7 +27,8 @@ namespace DB_Libary
 
         static Logic()
         {
-            Repo = new LibaryRepository();
+            LibsRepo = new LibaryItemsRepository();
+            PersonsRepo = new PersonsRepository();
         }
         public Logic()
         {
@@ -40,16 +42,16 @@ namespace DB_Libary
         public void UpdateLogicLists()
             //Updates the list from the database
         {
-            persons = Repo.GetsSortedBy(new IComparerFirstName()).ToList();
-            libaryItems = Repo.GetsSortedBy(new IComparerByItemName()).ToList();
+            libaryItems = LibsRepo.GetsSortedBy(new IComparerByItemName()).ToList();
+            persons = PersonsRepo.GetsSortedBy(new IComparerFirstName()).ToList();
         }
         public void Sort(IComparer<LibaryItem> comp)
         {
-            libaryItems.Sort(comp);
+            libaryItems=LibsRepo.GetsSortedBy(comp).ToList();
         }
         public void Sort(IComparer<Person> comp)
         {
-            persons.Sort(comp);
+            persons=PersonsRepo.GetsSortedBy(comp).ToList();
         }
 
         // Editing items choosing
@@ -63,7 +65,7 @@ namespace DB_Libary
             CurrentItem = chosen as LibaryItem;
             if (CurrentItem == null)
                 throw new Exception("Cant choose non Libary Item object");
-            else if (!Repo.Contain(CurrentItem))
+            else if (!LibsRepo.Contain(CurrentItem))
                 throw new Exception("This item is non chooseable");
         }
         public void ClearPerson()
@@ -92,7 +94,7 @@ namespace DB_Libary
             Person TrySigned = persons.Find((p) => p.Id == id);
             if (TrySigned != null)
             {
-                Signed = Repo.SignIn(TrySigned, password);
+                Signed = PersonsRepo.SignIn(TrySigned, password);
                 if (Signed != null)
                     return true;
             }
@@ -114,9 +116,9 @@ namespace DB_Libary
         }
         public bool Buy()
         {
-            if (CurrentItem != null && Repo.Contain(CurrentItem) && CurrentItem.IsBorrowed == false)
+            if (CurrentItem != null && LibsRepo.Contain(CurrentItem) && CurrentItem.IsBorrowed == false)
             {
-                if (Repo.Delete(CurrentItem) != null)
+                if (LibsRepo.Delete(CurrentItem) != null)
                 {
                     UpdateLogicLists();
                     ClearItem();
@@ -129,7 +131,7 @@ namespace DB_Libary
         {
             if (CurrentItem != null && Signed != null && CurrentItem.IsBorrowed == false)
             {
-                if (Repo.Borrow(Signed, CurrentItem) == CurrentItem)
+                if (LibsRepo.Borrow(Signed, CurrentItem) == CurrentItem)
                 {
                     UpdateLogicLists();
                     return true;
@@ -141,7 +143,7 @@ namespace DB_Libary
         {
             if (CurrentItem != null && Signed != null)
             {
-                if (Repo.ReturnBook(Signed, CurrentItem) == CurrentItem)
+                if (LibsRepo.ReturnBook(Signed, CurrentItem) == CurrentItem)
                 {
                     UpdateLogicLists();
                     return true;
@@ -157,17 +159,17 @@ namespace DB_Libary
         //Adding to database
         public LibaryItem AddJournal(string name, DateTime date, Frequancy Freq, string editors, double price = Journal.DEFAULT_JOURNAL_PRICE)
         {
-            return Repo.Add(new Journal(name, date, Freq, editors, price));
+            return LibsRepo.Add(new Journal(name, date, Freq, editors, price));
         }
         public LibaryItem AddBook(int publisher, int serialNum, string name, DateTime printedDate, string authors, string description = "info", double price = Book.DEFAULT_BOOK_PRICE, double discountRate = 0, int country = 965)
         {
             if (ISBN.PublishersDict.ContainsValue(publisher) && ISBN.PublishersDict.ContainsValue(country))
                 publisher = country = 0;
-            return Repo.Add(new Book(publisher, serialNum, name, printedDate, authors, description, price, discountRate, country));
+            return LibsRepo.Add(new Book(publisher, serialNum, name, printedDate, authors, description, price, discountRate, country));
         }
         public Person CostumerSignUp(string id, string fname, string lname, string city, string street, int houseNumber = -1, string password = "1234ABCD")
         {
-            Signed = Repo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
+            Signed = PersonsRepo.CostumerSignUp(id, fname, lname, city, street, houseNumber, password);
             if (Signed == null)
                 throw new Exception("Could'nt Sign you up check fields");
             UpdateLogicLists();
@@ -175,7 +177,7 @@ namespace DB_Libary
         }
         public Person EmployeSignUp(string id, string fname, string lname, string city, string street, string ManagerPassword, int houseNumber = -1, string password = "1234ABCD")
         {
-            Signed = Repo.EmployeeSignUp(id, fname, lname, city, street, ManagerPassword, houseNumber, password);
+            Signed = PersonsRepo.EmployeeSignUp(id, fname, lname, city, street, ManagerPassword, houseNumber, password);
             if (Signed == null)
                 throw new Exception("Can't Sign you as employee wrong password");
             UpdateLogicLists();
@@ -187,7 +189,7 @@ namespace DB_Libary
         {
             if (PersonToEdit.Equals(Signed))
                 return "Could not delete sigend user";
-            string msg = "Deleted "+Repo.Delete(PersonToEdit).ToString();
+            string msg = "Deleted "+PersonsRepo.Delete(PersonToEdit).ToString();
             ClearPerson();
             UpdateLogicLists();
             return msg;
@@ -196,7 +198,7 @@ namespace DB_Libary
         {
             if (CurrentItem != null && CurrentItem.IsBorrowed == false)
             {
-                return $"Deleted {Repo.Delete(CurrentItem)}";
+                return $"Deleted {LibsRepo.Delete(CurrentItem)}";
             }
             else
                 throw new Exception("Couldnt succseed deleting item");

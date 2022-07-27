@@ -125,6 +125,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="LibraryRepository.cs" />
     <Compile Include="Logic.cs" />
+    <Compile Include="PersonsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Data.rd.xml" />
   </ItemGroup>
