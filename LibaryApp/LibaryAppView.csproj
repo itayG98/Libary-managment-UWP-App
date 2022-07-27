@@ -219,9 +219,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Logic_MookData.csproj">
+    <ProjectReference Include="..\Data\ViewModel_MoockDB.csproj">
       <Project>{83a5586b-4c5b-44f6-b8e4-658abd00e4ca}</Project>
-      <Name>Logic_MookData</Name>
+      <Name>ViewModel_MoockDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogicLibary\LibaryAppModel.csproj">
       <Project>{fbd4f14c-8276-4c05-9440-e952c22790d0}</Project>

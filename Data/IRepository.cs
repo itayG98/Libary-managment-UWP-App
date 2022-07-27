@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DB_Libary
+namespace ViewModel_MoockDB
 {
     public interface IRepository<T>
     {
@@ -13,6 +13,5 @@ namespace DB_Libary
         T Get(T item);
         T Delete(T item);
         bool Contain(T Item);
-        Person SignIn(Person p, string password);
     }
 }

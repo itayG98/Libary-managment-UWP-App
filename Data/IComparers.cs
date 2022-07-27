@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DB_Libary
+namespace ViewModel_MoockDB
 {
     //LibaryItems Icomparers
     public class IComparerByItemName: IComparer<LibaryItem>

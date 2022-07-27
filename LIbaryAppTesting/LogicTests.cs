@@ -1,4 +1,4 @@
-﻿using DB_Libary;
+﻿using ViewModel_MoockDB;
 using LibaryModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -47,7 +47,7 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void GetPersonOrLibaryApp()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             LibaryItem lib = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person p = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
             Logic.Repo.Add(lib);
@@ -60,7 +60,7 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void GetIquaryAble()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             List<LibaryItem> libs1 = Repo.Get().ToList();
             List<LibaryItem> libs2 = LibaryDB.DataInstance.LibaryItems;
             for (int i = 0; i < libs1.Count; i++)
@@ -69,7 +69,7 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void GetByID()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             LibaryItem libaryItem = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person person = new Costumer("342432424", "Fname1", "Lname", "Rehovot", "none");
 
@@ -86,7 +86,7 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void SignIn()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             Person person = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none", 12, "123456");
             Assert.IsNull(Repo.SignIn(person, "12345678"));
             Assert.IsNotNull(Repo.SignIn(person, "123456"));
@@ -94,14 +94,14 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void CostumerSignUp()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             Assert.IsNotNull(Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456"));
             Assert.ThrowsException<Exception>(() => (Repo.CostumerSignUp("444444442", "Fname1", "Lname", "Rehovot", "none", 12, "123456")));
         }
         [TestMethod]
         public void EmployeeSignUp()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             Assert.IsNotNull(Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456"));
             Assert.IsNotNull(Repo.GetById("342432424"));
             Assert.ThrowsException<Exception>(() => (Repo.EmployeeSignUp("342432424", "Fname1", "Lname", "Rehovot", "none", "12345", 12, "123456")));
@@ -110,7 +110,7 @@ namespace LIbaryAppTesting
         [TestMethod]
         public void Contain()
         {
-            LibaryRepository Repo = new LibaryRepository();
+            LibaryItemsRepository Repo = new LibaryItemsRepository();
             LibaryItem lib1 = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
             Person p1 = new Costumer("999984131", "Fname1", "Lname", "Rehovot", "none");
             LibaryItem lib2 = new Journal("Yedioth Aharonot", DateTime.Today, Frequancy.Daily, "Avraham b", 15);
