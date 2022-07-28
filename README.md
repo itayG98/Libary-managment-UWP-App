@@ -56,6 +56,8 @@ It has 2 types of users first Costumer and second is Employee and can handle its
 
 •	Add reviews feature on the libary items.
 
+•	Connect database.
+
 
 
 # Summery
